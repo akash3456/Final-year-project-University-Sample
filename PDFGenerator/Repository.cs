@@ -14,6 +14,7 @@ namespace PDFGenerator
     {
         public void CreateMongoService() {
         //parse command line arguments and run service which will create and install service provided mongodb is installed. 
+            //Automatically kickoff mongo service. 
         }
         public void ConnectToDatabase() {
             try {

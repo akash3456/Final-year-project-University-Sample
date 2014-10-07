@@ -87,7 +87,7 @@ namespace PDFGenerator
             var GetselectedPath = fileinfo.FullName;
             txtPath.Text = GetselectedPath;
             txtFilePath.Text = GetselectedPath;
-            //open pdf template and read it in and get selectedfile
+            //open pdf template and read it in and get selectedfile// cannot parse text with itext.
             System.IO.Stream stream = fileinfo.OpenRead();
             using (System.IO.StreamReader reader = new System.IO.StreamReader(stream))
             {
