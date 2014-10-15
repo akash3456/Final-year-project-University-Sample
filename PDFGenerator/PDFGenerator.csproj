@@ -59,14 +59,37 @@
     <Reference Include="MongoDB.Driver">
       <HintPath>..\packages\mongocsharpdriver.1.9.2\lib\net35\MongoDB.Driver.dll</HintPath>
     </Reference>
+    <Reference Include="MySql.Data, Version=6.8.3.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
     <Reference Include="PdfSharp-WPF">
       <HintPath>..\..\..\..\..\Downloads\PDFsharp-MigraDocFoundation-Assemblies-1_32\WPF\PdfSharp-WPF.dll</HintPath>
     </Reference>
     <Reference Include="PdfSharp.Charting-WPF">
       <HintPath>..\..\..\..\..\Downloads\PDFsharp-MigraDocFoundation-Assemblies-1_32\WPF\PdfSharp.Charting-WPF.dll</HintPath>
     </Reference>
+    <Reference Include="Scryber.Common">
+      <HintPath>..\packages\scryber.0.8.8.5\lib\net40\Scryber.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Scryber.Components">
+      <HintPath>..\packages\scryber.0.8.8.5\lib\net40\Scryber.Components.dll</HintPath>
+    </Reference>
+    <Reference Include="Scryber.Configuration">
+      <HintPath>..\packages\scryber.0.8.8.5\lib\net40\Scryber.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Scryber.Drawing">
+      <HintPath>..\packages\scryber.0.8.8.5\lib\net40\Scryber.Drawing.dll</HintPath>
+    </Reference>
+    <Reference Include="Scryber.Generation">
+      <HintPath>..\packages\scryber.0.8.8.5\lib\net40\Scryber.Generation.dll</HintPath>
+    </Reference>
+    <Reference Include="Scryber.OpenType">
+      <HintPath>..\packages\scryber.0.8.8.5\lib\net40\Scryber.OpenType.dll</HintPath>
+    </Reference>
+    <Reference Include="Scryber.Styles">
+      <HintPath>..\packages\scryber.0.8.8.5\lib\net40\Scryber.Styles.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -128,9 +151,27 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <None Include="Schemas\Scryber\Scryber.Components.v08.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\Scryber\Scryber.Data.v08.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\Scryber\Scryber.Styles.v08.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\Scryber\Scryber.Types.v08.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\Scryber\Scryber.v08.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="XMLFile1.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

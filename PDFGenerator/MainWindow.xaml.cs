@@ -37,23 +37,8 @@ namespace PDFGenerator
         public MainWindow()
         {
             InitializeComponent();
-            //AddControlsToTab();
+
         }
-
-        private void AddControlsToTab()
-        {//for testing purposes. 
-            Button Tbutton = new Button();
-            Tbutton.Name = "Click";
-            layout.Children.Add(Tbutton);
-
-            TextBox box = new TextBox();
-            box.Name = "";
-            box.Text = "";
-            layout.Children.Add(box);
-
-            //this.layout
-        }
-        private void ReadTemplate() { } //reading pdf templates option for template or no template use Apitron.cs library for preview of template
 
 
         private void UploadTab_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -77,37 +62,40 @@ namespace PDFGenerator
             OpenDialog.Filter = "Pdf Files(.pdf)|*.pdf";
             OpenDialog.FilterIndex = 1;
             OpenDialog.Multiselect = false;
-
             Nullable<bool> show = OpenDialog.ShowDialog();
             if (show == true) OpenDialog.OpenFile();
 
             //try
             //{
+            //if (OpenDialog.FileName == null)
+            //throw new FileNotFoundException(String.Format("{0}",OpenDialog.FileName));
             System.IO.FileInfo fileinfo = new FileInfo(OpenDialog.FileName);
             var GetselectedPath = fileinfo.FullName;
             txtPath.Text = GetselectedPath;
-            txtFilePath.Text = GetselectedPath;
             //open pdf template and read it in and get selectedfile// cannot parse text with itext.
             System.IO.Stream stream = fileinfo.OpenRead();
             using (System.IO.StreamReader reader = new System.IO.StreamReader(stream))
             {
                 reader.ReadToEnd();
                 webBrowser.Navigate(GetselectedPath);
-
-                StringBuilder builder = new StringBuilder();
+                StringBuilder builder = new StringBuilder();//use direct contentByte
                 PdfReader read = new PdfReader(GetselectedPath);
                 Document doc = new Document(PageSize.A4, 25, 25, 25, 25);
                 FileStream writeStream = new FileStream("temp.pdf", FileMode.Create, FileAccess.ReadWrite);
                 PdfWriter writer = PdfWriter.GetInstance(doc, writeStream);
-                for (int i = 1; i <= read.NumberOfPages;i++ ) {
-                    var currentText = PdfTextExtractor.GetTextFromPage(read,i,new LocationTextExtractionStrategy());
-                    currentText = Encoding.UTF8.GetString(ASCIIEncoding.Convert(Encoding.Default,Encoding.UTF8, Encoding.Default.GetBytes(currentText)));
+                for (int i = 1; i <= read.NumberOfPages; i++)
+                {
+                    var currentText = PdfTextExtractor.GetTextFromPage(read, i, new LocationTextExtractionStrategy());
+                    currentText = Encoding.UTF8.GetString(ASCIIEncoding.Convert(Encoding.Default, Encoding.UTF8, Encoding.Default.GetBytes(currentText)));
                     builder.Append(currentText);
                     doc.Open();
                     doc.Add(new iTextSharp.text.Paragraph(currentText));
-                    doc.Close();
+
                 }
-                
+                writeStream.Flush();
+                doc.Close();
+                writer.Close();
+                //directcontentByte..
                 //read in and parse entire pdf document
                 //area on the form which displays preview of template.
                 //apply constraints for reading a pdf template cannot be nomore than one page otherwise program will error.
@@ -116,12 +104,20 @@ namespace PDFGenerator
             //catch (Exception exception) {
             //if error is caught then log it in db maybe or log files or even in a bog standard windows error message.
             //}   
+            //iTextSharp - pdfStamper
         }
+        private void ReadPdfTemplate(iTextSharp.text.Document document, PdfReader reader, string filename)
+        {
+
+            //using (FileStream stream = new FileStream()) { }
+        } //reading pdf templates option for template or no template use Apitron.cs library for preview of template
+
+        //find new way of generating pdf templates
+
         //maybe redundant
         private void getFileInfo()
         {
             var OpenDialog = new OpenFileDialog();
-            OpenDialog.Filter = "Pdf Files(.pdf)|*.pdf";
             OpenDialog.FilterIndex = 1;
             OpenDialog.Multiselect = false;
 
@@ -131,12 +127,11 @@ namespace PDFGenerator
             System.IO.FileInfo fileinfo = new FileInfo(OpenDialog.FileName);
             var GetselectedPath = fileinfo.FullName;
             txtPath.Text = GetselectedPath;
-            txtFilePath.Text = GetselectedPath;
         }
 
         private void txtPath_TextChanged(object sender, TextChangedEventArgs e)
         {
-            //txtPath.AppendText(getFileInfo());
+            
         }
 
         private void txtFilePath_TextChanged(object sender, TextChangedEventArgs e)
@@ -144,9 +139,23 @@ namespace PDFGenerator
             //make it editable for users to enter path if known and press enter;;;;;;;????
         }
 
-        private void wbSample_Navigating(object sender, NavigatingCancelEventArgs e)
+        private void BrowseXmlFile()
         {
-           
+            var OpenDialog = new OpenFileDialog();
+            OpenDialog.Filter = "Xml Files(.xml)|*.xml";//maybe use scryber pdf generator for generating from .xsd and xml files
+            OpenDialog.FilterIndex = 1;
+            OpenDialog.Multiselect = false;
+
+            Nullable<bool> showOut = OpenDialog.ShowDialog();
+            if (showOut == true)
+                OpenDialog.OpenFile();
+            System.IO.FileInfo info = new FileInfo(OpenDialog.FileName);
+            var getPath = info.FullName;
+            btnXmlBrowse.Text = getPath;
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
 
         }
 
