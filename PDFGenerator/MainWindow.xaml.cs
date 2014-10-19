@@ -106,32 +106,16 @@ namespace PDFGenerator
             //}   
             //iTextSharp - pdfStamper
         }
-        private void ReadPdfTemplate(iTextSharp.text.Document document, PdfReader reader, string filename)
+        private void ReadXmlTemplate(iTextSharp.text.Document document, PdfReader reader, string filename)
         {
-
+            //use scryber 
             //using (FileStream stream = new FileStream()) { }
         } //reading pdf templates option for template or no template use Apitron.cs library for preview of template
 
         //find new way of generating pdf templates
-
-        //maybe redundant
-        private void getFileInfo()
-        {
-            var OpenDialog = new OpenFileDialog();
-            OpenDialog.FilterIndex = 1;
-            OpenDialog.Multiselect = false;
-
-            Nullable<bool> show = OpenDialog.ShowDialog();
-            if (show == true) OpenDialog.OpenFile();
-
-            System.IO.FileInfo fileinfo = new FileInfo(OpenDialog.FileName);
-            var GetselectedPath = fileinfo.FullName;
-            txtPath.Text = GetselectedPath;
-        }
-
         private void txtPath_TextChanged(object sender, TextChangedEventArgs e)
         {
-            
+
         }
 
         private void txtFilePath_TextChanged(object sender, TextChangedEventArgs e)
@@ -145,18 +129,19 @@ namespace PDFGenerator
             OpenDialog.Filter = "Xml Files(.xml)|*.xml";//maybe use scryber pdf generator for generating from .xsd and xml files
             OpenDialog.FilterIndex = 1;
             OpenDialog.Multiselect = false;
-
             Nullable<bool> showOut = OpenDialog.ShowDialog();
-            if (showOut == true)
-                OpenDialog.OpenFile();
-            System.IO.FileInfo info = new FileInfo(OpenDialog.FileName);
-            var getPath = info.FullName;
-            btnXmlBrowse.Text = getPath;
+            if (showOut == true) OpenDialog.OpenFile();
+                System.IO.FileInfo info = new FileInfo(OpenDialog.FileName);
+                var getPath = info.FullName;
+                btnXmlBrowse.Text = getPath;
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-
+            if (btnUploadXml != null)
+            {
+                BrowseXmlFile();
+            }
         }
 
     }

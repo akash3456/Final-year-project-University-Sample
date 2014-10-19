@@ -32,3 +32,10 @@ C:\Users\AkashGamingRig\documents\visual studio 2013\Projects\PDFGenerator\PDFGe
 C:\Users\AkashGamingRig\documents\visual studio 2013\Projects\PDFGenerator\PDFGenerator\bin\Debug\ClosedXML.dll
 C:\Users\AkashGamingRig\documents\visual studio 2013\Projects\PDFGenerator\PDFGenerator\bin\Debug\DocumentFormat.OpenXml.dll
 C:\Users\AkashGamingRig\documents\visual studio 2013\Projects\PDFGenerator\PDFGenerator\bin\Debug\ClosedXML.xml
+C:\Users\AkashGamingRig\documents\visual studio 2013\Projects\PDFGenerator\PDFGenerator\bin\Debug\Scryber.Common.dll
+C:\Users\AkashGamingRig\documents\visual studio 2013\Projects\PDFGenerator\PDFGenerator\bin\Debug\Scryber.Components.dll
+C:\Users\AkashGamingRig\documents\visual studio 2013\Projects\PDFGenerator\PDFGenerator\bin\Debug\Scryber.Configuration.dll
+C:\Users\AkashGamingRig\documents\visual studio 2013\Projects\PDFGenerator\PDFGenerator\bin\Debug\Scryber.Drawing.dll
+C:\Users\AkashGamingRig\documents\visual studio 2013\Projects\PDFGenerator\PDFGenerator\bin\Debug\Scryber.Generation.dll
+C:\Users\AkashGamingRig\documents\visual studio 2013\Projects\PDFGenerator\PDFGenerator\bin\Debug\Scryber.OpenType.dll
+C:\Users\AkashGamingRig\documents\visual studio 2013\Projects\PDFGenerator\PDFGenerator\bin\Debug\Scryber.Styles.dll
