@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<?pdfx parser=mode="Strict" parser=log="True"?>
+<pdf:Document id="CodeProjectExample"
+              xmlns:pdf="Scryber.Components, Scryber.Components, Version=0.8.0.0, Culture=neutral, PublicKeyToken=872cbeb81db952fe"
+              xmlns:style="Scryber.Styles, Scryber.Styles, Version=0.8.0.0, Culture=neutral, PublicKeyToken=872cbeb81db952fe"
+              xmlns:data="Scryber.Data, Scryber.Components, Version=0.8.0.0, Culture=neutral, PublicKeyToken=872cbeb81db952fe"
+              auto-bind="true">
+  <Styles>
+    <!-- Default pager style-->
+    <style:Style applied-type="pdf:Page">
+      <style:Page size="A4" orientation="Portrait"/>
+    </style:Style>
+  </Styles>
+
+  <Pages>
+    <!--First Page-->
+    <pdf:Page id="FirstPage">
+      <Content>Test Page</Content>
+    </pdf:Page>
+  </Pages>
+</pdf:Document>
