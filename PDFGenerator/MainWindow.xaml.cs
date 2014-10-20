@@ -16,6 +16,8 @@ using iTextSharp.text.pdf;
 using iTextSharp.text;
 using iTextSharp.text.pdf.parser;
 using System.Windows.Forms.Layout;
+using Scryber.Data;
+using Scryber.Components;
 using Microsoft.Win32;
 using System.IO;
 
@@ -123,18 +125,33 @@ namespace PDFGenerator
             //make it editable for users to enter path if known and press enter;;;;;;;????
         }
 
-        private void BrowseXmlFile()
+        private void BrowseXmlFile()//also used for reading xml files.
         {
             var OpenDialog = new OpenFileDialog();
-            OpenDialog.Filter = "Xml Files(.xml)|*.xml";//maybe use scryber pdf generator for generating from .xsd and xml files
+            OpenDialog.Filter = "Xml Files(.xml)|*.xml";
+            OpenDialog.Filter = "Pdfx Files(.pdfx)|*.pdfx";
             OpenDialog.FilterIndex = 1;
             OpenDialog.Multiselect = false;
             Nullable<bool> showOut = OpenDialog.ShowDialog();
             if (showOut == true) OpenDialog.OpenFile();
-                System.IO.FileInfo info = new FileInfo(OpenDialog.FileName);
-                var getPath = info.FullName;
-                btnXmlBrowse.Text = getPath;
+            System.IO.FileInfo info = new FileInfo(OpenDialog.FileName);
+            var getPath = info.FullName;
+            btnXmlBrowse.Text = getPath;
+
+            //readStream
+            FileStream writer = new FileStream("temp.pdf", FileMode.Create, FileAccess.ReadWrite);//FileNames
+            using (Scryber.Components.PDFDocument document = Scryber.Components.PDFDocument.ParseDocument(getPath))
+            {
+                document.ProcessDocument(writer);
+
+            }
+
+
         }
+
+        //private String generateRandomFileName() { 
+
+        //}
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {

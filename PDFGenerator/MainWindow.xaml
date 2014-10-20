@@ -23,7 +23,6 @@
             </TabItem>
             <TabItem Header="GenerateDoc" >
                 <Grid Background="#FFBBB1B1" Margin="0,0,0,25"/>
-
             </TabItem>
             <TabItem Header="Upload xml template">
                 <StackPanel Orientation="Horizontal" Background="#FFBBB1B1" Width="882">
