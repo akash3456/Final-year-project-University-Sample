@@ -6,31 +6,19 @@ namespace PdfGeneratorTests
     [TestClass]
     public class UnitTest1
     {
-        //one class for testing all aspects of pdf generator..
-        [TestMethod]
-        public void TestMethod1()
-        {
-
-        }
         [TestMethod]
         public void ReadPdfTemplates() { }
         [TestMethod]
-        public void CreateExcelSpreadsheets() { } //from what is the question
+        public void CreateExcelSpreadsheets() { }
         [TestMethod]
-        public void SendEmails() { }              //parsed from textbox.
+        public void SendEmails() { }
         [TestMethod]
         public void CreatePdfFromTemplate() { } //make sure text and acro fields are placed in the correct places.
-
-        [TestMethod]
-        public void GeneratePasswordProtectedDocuments() { } //Generate passwordProtectedDocs????
 
         [TestMethod]//feedback for User interface..
         public void UsersSelectPdfOnly() { }
 
         [TestMethod]
         public void CanViewPdfTemplate() { }
-
-        //[TestMethod]
-        //public void 
     }
 }
