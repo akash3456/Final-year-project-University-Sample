@@ -40,7 +40,7 @@
                         <TextBox Name="txtFileUploadPath" Grid.Column="2" Grid.Row="1" VerticalAlignment="Top" Height="20" Width="418" Margin="-691,28,-47,8"></TextBox>
                         <TextBox Name="txtDestinationForPdfBatch" Grid.Row="1" Grid.Column="2" VerticalAlignment="Top" Height="20" Width="418" IsEnabled="False" Margin="-642,55,0,4"></TextBox>
                         <Button Name="btnDestinationPath" Content="Set Destination Path" Grid.Column="2" Grid.Row="1" IsEnabled="False" Click="btnDestinationPath_Click" Height="20" Width="119" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="-107,55,0,0"></Button>
-                        <Button Name="btnGen" Grid.Column="2" Grid.Row="1" VerticalAlignment="Top" Height="20" Width="118" IsEnabled="False" Content="Generate" Margin="-121,83,0,0"></Button>
+                        <Button Name="btnGen" Grid.Column="2" Click="btnGen_Click" Grid.Row="1" VerticalAlignment="Top" Height="20" Width="118" IsEnabled="False" Content="Generate" Margin="-121,83,0,0"></Button>
                         <GroupBox Header="View Status of Batch" Width="868" Margin="-540,120,0,3">
                             <Grid>
                                 <DataGrid Name="DataGrid1" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" Background="#FFBBB1B1">

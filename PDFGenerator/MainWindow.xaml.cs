@@ -33,21 +33,24 @@ namespace PDFGenerator
     {
         OpenFileDialog OpenDialog = new OpenFileDialog();
         System.Windows.Forms.FolderBrowserDialog FolderBrowser = new System.Windows.Forms.FolderBrowserDialog();
-        BackgroundWorker worker = new BackgroundWorker();
+        BackgroundWorker worker = new BackgroundWorker(); //use for parallel processing
+
+        //dialogs for multiple Processing of pdf documents
+        OpenFileDialog fileDialog = new OpenFileDialog();
+        System.Windows.Forms.FolderBrowserDialog folderBrowserM = new System.Windows.Forms.FolderBrowserDialog();
         public MainWindow()
         {
             InitializeComponent();
             worker.WorkerReportsProgress = true;
             worker.WorkerSupportsCancellation = true;
-            worker.DoWork += new DoWorkEventHandler(worker_DoWork);
-            worker.ProgressChanged += new ProgressChangedEventHandler(worker_ProgressChanged);
-            worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(worker_RunWorkerCompleted);
+            //worker.DoWork += new DoWorkEventHandler(worker_DoWork);
+            //worker.ProgressChanged += new ProgressChangedEventHandler(worker_ProgressChanged);
+            //worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(worker_RunWorkerCompleted);
         }
         private void UploadTab_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
 
         }
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
 
@@ -61,7 +64,6 @@ namespace PDFGenerator
         {
 
         }
-
         private void txtFilePath_TextChanged(object sender, TextChangedEventArgs e)
         {
             //make it editable for users to enter path if known and press enter;;;;;;;????
@@ -82,8 +84,27 @@ namespace PDFGenerator
             System.IO.FileInfo info = new FileInfo(OpenDialog.FileName);
             var getPath = info.FullName;
             if (btnUploadXml != null) { btnXmlBrowse.Text = getPath; }
-            if (btnGen != null) { txtFileUploadPath.Text = getPath; }
+            //if (btnGenerate != null) { txtFileUploadPath.Text = getPath; }
             return OpenDialog.FileName.ToString();
+        }
+        //Batch Processing
+        private String BrowseXmlFileBatch()
+        {
+            fileDialog.Filter = "Pdfx Files(.pdfx)|*.pdfx";
+            fileDialog.FilterIndex = 1;
+            fileDialog.Multiselect = false;
+            Nullable<bool> showOut = fileDialog.ShowDialog();
+            if (showOut == true) fileDialog.OpenFile();
+            if (fileDialog.FileName.Equals(""))
+            {
+                MessageBox.Show("You must provide a valid path", "Error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
+                return "";
+            }
+            System.IO.FileInfo info = new FileInfo(fileDialog.FileName);
+            var getPath = info.FullName;
+            if(btnUploadTemplate != null){txtFileUploadPath.Text = getPath.ToString();}
+            //if(btnGen != null){ }
+            return fileDialog.FileName;
         }
         private String GetFileName(OpenFileDialog dialog)
         {
@@ -101,9 +122,16 @@ namespace PDFGenerator
             //filename is the pdf equivalent.
             FolderBrowser.ShowNewFolderButton = true;
             System.Windows.Forms.DialogResult result = FolderBrowser.ShowDialog();
-            if (result.ToString() == "OK") { txtDestination.Text = FolderBrowser.SelectedPath; }//generate random filenames but with good naming conventions.
-            if (btnDestinationPath != null) { txtDestinationForPdfBatch.Text = FolderBrowser.SelectedPath; }
+            if (result.ToString() == "OK" && btnGenerate != null) { txtDestination.Text = FolderBrowser.SelectedPath; }//generate random filenames but with good naming conventions.
             return FolderBrowser.SelectedPath;
+        }
+        //Batch Processing
+        private String SpecifyDestPathForBatch()
+        {
+            folderBrowserM.ShowNewFolderButton = true;
+            System.Windows.Forms.DialogResult result = folderBrowserM.ShowDialog();
+            if (result.ToString() == "OK" && btnGen != null) { txtDestinationForPdfBatch.Text = folderBrowserM.SelectedPath; }
+            return folderBrowserM.SelectedPath;
         }
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
@@ -118,7 +146,6 @@ namespace PDFGenerator
         {
             if (btnDestPath != null) { SpecifyDestinationPath(); btnGenerate.IsEnabled = true; }
         }
-
         //Alter table to add in a SUN number and map it to the filename
         //private String CreateFileCredentials() {
         //generate a filename based on a SUN id......
@@ -129,28 +156,39 @@ namespace PDFGenerator
             {
                 for (int i = 0; i < 100; i++)
                 {
-
-                    progressBar.Value++;
-                    CreatePdf(FolderBrowser.SelectedPath, String.Format("")); System.Threading.Thread.Sleep(100);
+                    //create a progress bar for each allocated job..
+                    progressBar.Value++;//has created empty pdf files but corrupt ones..
                 }
+                CreatePdf(FolderBrowser.SelectedPath, String.Format("")); System.Threading.Thread.Sleep(100);
                 MessageBox.Show("Your File has been Created", "", MessageBoxButton.OK);
                 //run process to show up windows explorer and to the relevant files....
             }
         }
-        //event handler for the progress changed _DoWork
 
         private void btnUploadTemplate_Click(object sender, RoutedEventArgs e)
         {
-            if (btnUploadTemplate != null) { BrowseXmlFile(); btnDestinationPath.IsEnabled = true; txtDestinationForPdfBatch.IsEnabled = true; }
+            if (btnUploadTemplate != null) { BrowseXmlFileBatch(); btnDestinationPath.IsEnabled = true; txtDestinationForPdfBatch.IsEnabled = true; }
         }
         private void btnDestinationPath_Click(object sender, RoutedEventArgs e)
         {
             if (btnDestinationPath != null)
-                SpecifyDestinationPath();
+                SpecifyDestPathForBatch();
             btnGen.IsEnabled = true;
         }
-        //implement functionality for multiple templates in an archive, if user wants the program to handle multiple templates which are different from each other. then upload a zip archive with obv different template names and different template definition..
+        //implement functionality for multiple templates in an archive, if user wants the program to handle multiple templates which are different from each other.
+        //then upload a zip archive with 
+        //obv different template names and different template definition..
+        //need to see if library supports compressed pdf documents and test with images..
         private void btnGenerateBatch_Click(object sender, RoutedEventArgs e)
+        {
+            //var doc = new PDFDocument();
+        }
+        private void processGenButton(String Browsefilename, String BrowsedDestinationPath)
+        {
+            Browsefilename = fileDialog.FileName;
+            //folderBrowserM
+        }
+        private void btnGen_Click(object sender, RoutedEventArgs e)
         {
 
         }
