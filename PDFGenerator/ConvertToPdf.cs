@@ -7,6 +7,9 @@ using System.IO;
 using Scryber.Components.Layout;
 using Scryber.Components;
 using System.Diagnostics;
+using System.Xml.XPath;
+using Scryber.Data;
+using System.Xml;
 
 
 namespace PDFGenerator
@@ -21,42 +24,40 @@ namespace PDFGenerator
             this.filename = filename;
             this.DestPath = Destinationpath;
         }
-
-        public void CreatePdfFromPDFX()
+        public PDFDocument CreatePdfFromPDFX()
         {
-            try
+            //try
+            //{
+            var Stopwatch = new Stopwatch();
+            var outputPath = String.Format(@"{0}\{1}.pdf", DestPath, Guid.NewGuid().ToString());
+            FileStream writer = new FileStream(outputPath, FileMode.CreateNew, FileAccess.ReadWrite);
+            Stopwatch.Start();
+            using (PDFDocument document = PDFDocument.ParseDocument(filename))
             {
-                var Stopwatch = new Stopwatch();
-                var outputPath = String.Format(@"{0}\{1}.pdf", DestPath, Guid.NewGuid().ToString());
-                FileStream writer = new FileStream(outputPath, FileMode.CreateNew, FileAccess.ReadWrite);
-                Stopwatch.Start();
-                using (PDFDocument document = PDFDocument.ParseDocument(filename))
-                {
-                    document.ProcessDocument(writer);
-                }
+                document.ProcessDocument(writer);
+                document.Info.Author = System.Environment.UserName;
+                document.Info.CreationDate = DateTime.Now;
+
                 writer.Flush();
                 writer.Close();
                 Stopwatch.Stop();
                 Console.WriteLine(String.Format("Files took {0} to create", Stopwatch.Elapsed));
+                return document;
             }
-            catch (Exception exception)
-            {
-                //log the error somehow...
-            }
-            //need to find to attach a progress bar to each process for generating a pdf file for example. 
         }
         public static String outputFilePath(String destpath)
         {
             var path = String.Format(@"{0}\{1}.pdf", destpath);
             return path;
         }
-
-        public void CreatePdfBatch()//use xpath navigator in this method
+        public static String getFilename(String filename)
         {
-
-            //var getRepo = new Repository();
-            //getRepo
+            return filename;
         }
-        //i want to integrate an editor in this program for users to easily edit pdfx files and with intellisense with greg's editor 2.0
+        public static String DestinationPath(String destinationPath)
+        {
+            return destinationPath;
+        }
+        //Maybe have a remove file for users once uploaded if they make a mistake but need to finish batch production phase.
     }
 }

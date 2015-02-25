@@ -6,93 +6,143 @@ using System.Threading.Tasks;
 using MySql.Data;
 using Scryber.Components;
 using Scryber.Styles;
+using Scryber.Data;
+using System.Xml.Linq;
 using System.IO;
-using System.Diagnostics.Tracing;
+using System.Diagnostics;
+using System.Data;
+using System.Windows.Threading;
+using System.IO.Compression;
+using ClosedXML.Excel;
+
+
 
 namespace PDFGenerator
 {
-    //will require the latest version of mongodb installed on pc or remote pc
     class Repository
     {
-        private String outputPath;
-        private MySql.Data.MySqlClient.MySqlConnection connect;
-        public Repository()
-        {
-            try
-            {
-                String connectionString = String.Format("Server=localhost;Database=test;username=root;password=;Port=3306");
-                this.connect = new MySql.Data.MySqlClient.MySqlConnection(connectionString);
-                connect.ConnectionString = connectionString;
-                connect.Open();
-            }
-            catch (Exception exception)
-            {
-                Console.WriteLine(String.Format(exception.StackTrace));
-            }
-        }
-        public void ConnectToDb()
-        {
-            try
-            {
-                String connectionString = String.Format("Server=localhost;Database=test;username=root;password=;Port=3306");
-                MySql.Data.MySqlClient.MySqlConnection connect = new MySql.Data.MySqlClient.MySqlConnection(connectionString);
-                connect.ConnectionString = connectionString;
-                connect.Open();
-            }
-            catch (Exception exception)
-            {
-                Console.WriteLine(String.Format(exception.StackTrace));
-            }
-        }
-        public PDFDocument getAll()//return a row in the db table and carry out file stream processing for each file. 
-        {
-            this.connect.Open();
-            var command = this.connect.CreateCommand();
-            command.CommandText = String.Format("SELECT * FROM TEST.T_TEST_DATA"); 
-            var reader = command.ExecuteReader();
-            var dto = new SampleDto();
-            while (reader.Read())
-            {
-                dto.getFirstName = reader["F_FirstName"].ToString();
-                dto.getSecondName = reader["F_SecondName"].ToString();
-                dto.getFirstYearGrade = int.Parse(reader["F_FirstYearGrade"].ToString());
-                dto.getSecondYearGrade = int.Parse(reader["F_SecondYearGrade"].ToString());
-                dto.getUsername = reader["F_AstonUsername"].ToString();
-                dto.getEmail = reader["F_EmailAddress"].ToString();
+        String filename;
+        String destinationPath;
+        public String outputPdfFile;
+        //Input File can be .xml/.csv/.xls - closedxml, could be any file with input data
+        List<String> collect = new List<String>();
+        List<Object> times = new List<Object>();
+        Stopwatch watch = new Stopwatch();
 
-
-            }
-            return null;//return all rows and carry out a pdf document for each row open and close off each file per row.   Streams for each row inside loop.
-        }
-        public int GetbyID(String outputPath)
+        public Repository(String filename, String DestinationPath)
         {
+            watch.Start();
+            this.filename = filename;
+            this.destinationPath = DestinationPath;
+        }
+
+        public SampleDto getAll()
+        {
+            SampleDto dto = new SampleDto();
             String connectionString = String.Format("Server=localhost;Database=test;username=root;password=;Port=3306");
-            using (this.connect = new MySql.Data.MySqlClient.MySqlConnection(connectionString))
+            using (MySql.Data.MySqlClient.MySqlConnection connect = new MySql.Data.MySqlClient.MySqlConnection(connectionString))
             {
-                connect.ConnectionString = connectionString;
                 connect.Open();
                 var command = connect.CreateCommand();
-                command.CommandText = String.Format("SELECT SUN from TEST.T_TEST_DATA");
+                command.CommandText = String.Format("SELECT * FROM TEST.T_TEST_DATA");
+                command.Prepare();
                 var reader = command.ExecuteReader();
-                var dto = new SampleDto();
-                IEnumerable<SampleDto> read = null;
-                while (reader.Read())
+                var table = new DataTable();
+                table.Load(reader);
+                foreach (DataRow row in table.Rows)
                 {
-                    foreach (var temp in read)
+                    dto.getFirstName = row.ItemArray[0].ToString();
+                    dto.getSecondName = row.ItemArray[1].ToString();
+                    dto.getFirstYearGrade = int.Parse(row.ItemArray[2].ToString());
+                    dto.getSecondYearGrade = int.Parse(row.ItemArray[3].ToString());
+                    dto.getUsername = row.ItemArray[4].ToString();
+                    dto.getEmail = row.ItemArray[5].ToString();
+                    dto.getSUN = int.Parse(row.ItemArray[6].ToString());
+
+                    var outputPath = String.Format(@"{0}\{1}.pdf", destinationPath, Guid.NewGuid().ToString());
+                    this.outputPdfFile = outputPath;
+                    
+                    FileStream stream = new FileStream(outputPath, FileMode.CreateNew, FileAccess.ReadWrite);
+                    using (PDFDocument document = PDFDocument.ParseDocument(filename))
                     {
-                        //in order to do one row at a time per file maybe do a sql to linq abstraction?????
-                        dto.getSUN = Convert.ToInt32(reader["SUN"]);
-                        //level of abstraction needs to be separated out and this is where i would have a loop and the stream to write to for each and every row. 
-                        //dto.getFirstName = reader["F_FirstName"].ToString();
-                        //dto.getSecondName = reader["F_SecondName"].ToString();
-                        //dto.getFirstYearGrade = Convert.ToInt32(reader["F_FirstYearGrade"]);
-                        //dto.getSecondYearGrade = Convert.ToInt32(reader["F_SecondYearGrade"])
-                        //dto.
-                        //reader["SUN"] = int.TryParse(temp.getSUN());//reusbale methods for parsing dbvalues.
+                        document.Items["Firstname"] = dto.getFirstName;
+                        document.Items["Secondname"] = dto.getSecondName;
+                        document.Items["FirstYearGrade"] = dto.getFirstYearGrade;
+                        document.Items["SecondYearGrade"] = dto.getSecondYearGrade;
+                        document.Items["AstonUsername"] = dto.getUsername;
+                        document.Items["EmailAddress"] = dto.getEmail;
+                        document.Items["SUN"] = dto.getSUN;
+                        document.ProcessDocument(stream, true);
+                        document.Info.Author = System.Environment.UserName;
+                        document.Info.CreationDate = DateTime.Now;
+                        stream.Flush();
+                        stream.Close();
+                        this.Progress = watch;
+                        getContents(Path.GetFileName(outputPath));
                     }
                 }
-                return dto.getSUN;
+                watch.Stop();
+                reader.Close();
             }
+            return dto;
+        }
+
+        public void ReadCsv(String inputFile) { 
+        
+        }
+
+        //import into database table thats the reason why..
+        public void ReadExcel(String inputFile) {//,xlsx
+            var collection = new List<Object>();
+            var workbook = new XLWorkbook(inputFile);
+            var workSheet = workbook.Worksheets.First();
+
+            var range = workSheet.RangeUsed();
+            var colCount = range.ColumnCount();
+            foreach (var row in range.RowsUsed())
+            {
+                object[] rowData = new object[colCount];
+                Int32 i = 0;
+                row.Cells().ForEach(c => rowData[i++] = c.Value);
+                collection.Add(rowData);
+
+                var connectionString = String.Format("Server=localhost;Database=test;username=root;password=;Port=3306");
+                var connect = new MySql.Data.MySqlClient.MySqlConnection(connectionString);
+                connect.Open();
+                //communicate with the database..
+            }
+        }
+
+        public void ReadXml(String inputFile) { 
+        
+        
+        }
+
+
+
+        public Stopwatch Progress { get; set; }
+        public DataTable getContents(String outputPath)
+        {
+            var table = new DataTable();
+            table.Columns.Add("FileName");
+            collect.Add(outputPath);
+            for (int i = 0; i < collect.Count; i++)
+            {
+                var row = table.NewRow();
+                row["FileName"] = collect[i];
+                table.Rows.Add(row);
+            }
+            return table;
+        }
+        public System.Diagnostics.Stopwatch getProgressCheck()
+        {
+            return watch;
+        }
+        public String ProcessDirectoryInfo(String Filename)
+        {
+            var directoryInfo = new DirectoryInfo(Filename);
+            String path = directoryInfo.Parent.FullName;
+            return path;
         }
     }
 }

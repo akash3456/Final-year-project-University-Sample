@@ -10,8 +10,6 @@ namespace PDFGenerator
     {
         public int getSUN { get; set; }
 
-        public int MyProperty { get; set; }
-
         public String getFirstName { get; set; }
 
         public String getSecondName { get; set; }
@@ -25,5 +23,7 @@ namespace PDFGenerator
         public String getEmail { get; set; }
 
         public int getProgressCheck { get; set; }
+
+        public String getFileName { get; set; }
     }
 }

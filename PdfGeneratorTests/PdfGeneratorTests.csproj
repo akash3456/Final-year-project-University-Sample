@@ -35,7 +35,34 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MySql.Data, Version=6.6.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
+    <Reference Include="Scryber.Common, Version=0.8.0.0, Culture=neutral, PublicKeyToken=872cbeb81db952fe, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\PDFGenerator\bin\Release\Scryber.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Scryber.Components">
+      <HintPath>..\PDFGenerator\bin\Debug\Scryber.Components.dll</HintPath>
+    </Reference>
+    <Reference Include="Scryber.Configuration">
+      <HintPath>..\PDFGenerator\bin\Debug\Scryber.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Scryber.Drawing">
+      <HintPath>..\PDFGenerator\bin\Debug\Scryber.Drawing.dll</HintPath>
+    </Reference>
+    <Reference Include="Scryber.Generation">
+      <HintPath>..\PDFGenerator\bin\Debug\Scryber.Generation.dll</HintPath>
+    </Reference>
+    <Reference Include="Scryber.OpenType">
+      <HintPath>..\PDFGenerator\bin\Debug\Scryber.OpenType.dll</HintPath>
+    </Reference>
+    <Reference Include="Scryber.Styles">
+      <HintPath>..\PDFGenerator\bin\Debug\Scryber.Styles.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.XML" />
+    <Reference Include="System.Xml.Serialization" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -50,8 +77,12 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="TestDto.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

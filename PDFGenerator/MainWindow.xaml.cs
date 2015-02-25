@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Diagnostics;
 using System.Diagnostics.Tracing;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Collections.ObjectModel;
 using System.Windows.Documents;
 using System.ComponentModel;
 using System.Windows.Input;
@@ -14,9 +16,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using iTextSharp.text.pdf;
-using iTextSharp.text;
-using iTextSharp.text.pdf.parser;
 using System.Windows.Forms.Layout;
 using Scryber.Data;
 using Scryber.Components;
@@ -24,6 +23,7 @@ using Scryber.Text;
 using Scryber.Generation;
 using Microsoft.Win32;
 using System.IO;
+using System.Data;
 
 namespace PDFGenerator
 {
@@ -33,19 +33,41 @@ namespace PDFGenerator
     {
         OpenFileDialog OpenDialog = new OpenFileDialog();
         System.Windows.Forms.FolderBrowserDialog FolderBrowser = new System.Windows.Forms.FolderBrowserDialog();
-        BackgroundWorker worker = new BackgroundWorker(); //use for parallel processing
 
+        System.Windows.Forms.NotifyIcon notify = new System.Windows.Forms.NotifyIcon();
         //dialogs for multiple Processing of pdf documents
         OpenFileDialog fileDialog = new OpenFileDialog();
         System.Windows.Forms.FolderBrowserDialog folderBrowserM = new System.Windows.Forms.FolderBrowserDialog();
+
+        OpenFileDialog importFile = new OpenFileDialog();
+
         public MainWindow()
         {
             InitializeComponent();
-            worker.WorkerReportsProgress = true;
-            worker.WorkerSupportsCancellation = true;
-            //worker.DoWork += new DoWorkEventHandler(worker_DoWork);
-            //worker.ProgressChanged += new ProgressChangedEventHandler(worker_ProgressChanged);
-            //worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(worker_RunWorkerCompleted);
+
+        }
+
+
+        private void Notify_MouseDoubleClick(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            this.WindowState = System.Windows.WindowState.Normal;
+        }
+
+        private void Window_StateChanged(object sender, EventArgs e)
+        {
+            if (this.WindowState == System.Windows.WindowState.Minimized)
+            {
+                this.ShowInTaskbar = false;
+                notify.BalloonTipTitle = "Minimize Successful";
+                notify.BalloonTipText = "Minimized the app";
+                notify.ShowBalloonTip(400);
+                notify.Visible = true;
+            }
+            else if (this.WindowState == WindowState.Normal)
+            {
+                notify.Visible = false;
+                this.ShowInTaskbar = true;
+            }
         }
         private void UploadTab_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -102,7 +124,7 @@ namespace PDFGenerator
             }
             System.IO.FileInfo info = new FileInfo(fileDialog.FileName);
             var getPath = info.FullName;
-            if(btnUploadTemplate != null){txtFileUploadPath.Text = getPath.ToString();}
+            if (btnUploadTemplate != null) { txtFileUploadPath.Text = getPath.ToString(); }
             //if(btnGen != null){ }
             return fileDialog.FileName;
         }
@@ -122,7 +144,7 @@ namespace PDFGenerator
             //filename is the pdf equivalent.
             FolderBrowser.ShowNewFolderButton = true;
             System.Windows.Forms.DialogResult result = FolderBrowser.ShowDialog();
-            if (result.ToString() == "OK" && btnGenerate != null) { txtDestination.Text = FolderBrowser.SelectedPath; }//generate random filenames but with good naming conventions.
+            if (result.ToString() == "OK" && btnGenerate != null) { txtDestination.Text = FolderBrowser.SelectedPath; }
             return FolderBrowser.SelectedPath;
         }
         //Batch Processing
@@ -164,7 +186,6 @@ namespace PDFGenerator
                 //run process to show up windows explorer and to the relevant files....
             }
         }
-
         private void btnUploadTemplate_Click(object sender, RoutedEventArgs e)
         {
             if (btnUploadTemplate != null) { BrowseXmlFileBatch(); btnDestinationPath.IsEnabled = true; txtDestinationForPdfBatch.IsEnabled = true; }
@@ -175,23 +196,80 @@ namespace PDFGenerator
                 SpecifyDestPathForBatch();
             btnGen.IsEnabled = true;
         }
-        //implement functionality for multiple templates in an archive, if user wants the program to handle multiple templates which are different from each other.
-        //then upload a zip archive with 
-        //obv different template names and different template definition..
-        //need to see if library supports compressed pdf documents and test with images..
         private void btnGenerateBatch_Click(object sender, RoutedEventArgs e)
         {
-            //var doc = new PDFDocument();
         }
+
         private void processGenButton(String Browsefilename, String BrowsedDestinationPath)
         {
-            Browsefilename = fileDialog.FileName;
-            //folderBrowserM
+            try
+            {
+                Browsefilename = fileDialog.FileName;
+                BrowsedDestinationPath = folderBrowserM.SelectedPath;
+                var repository = new Repository(Browsefilename, BrowsedDestinationPath);
+                repository.getAll();
+                DataGrid1.DataContext = repository.getContents(repository.outputPdfFile);
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(String.Format("{0}", exception.InnerException));
+            }
         }
         private void btnGen_Click(object sender, RoutedEventArgs e)
         {
+            if (btnGen != null)
+                this.ListAllJobs.IsEnabled = true;
+            processGenButton(fileDialog.FileName, folderBrowserM.SelectedPath);
+            //var iconHandle =
+            //notify.Icon = new System.Drawing.Icon(String.Format("{0}"));
+            //notify.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(Notify_MouseDoubleClick);
+        }
+
+        private void DataGrid1_Loaded(object sender, RoutedEventArgs e)
+        {
 
         }
+
+        private void ListAllJobs_Click(object sender, RoutedEventArgs e)
+        {
+            var repo = new Repository(fileDialog.FileName, folderBrowserM.SelectedPath);
+            //var check = repo.Progress;
+            //kick off progress bars and display notifyIcon but first message box
+        }
+
+        private String importBrowseDataFile()
+        {
+            var repo = new Repository(fileDialog.FileName, folderBrowserM.SelectedPath);
+            importFile.Filter = "Files(*.xls,*.xlsx, *.csv,*.xml) | *.xls;*.xlsx;*.csv,*.xml";
+            importFile.FilterIndex = 1;
+            importFile.Multiselect = false;
+            Nullable<bool> showOut = importFile.ShowDialog();
+            if (showOut == true)
+                importFile.OpenFile();
+            if (importFile.FileName.Equals(""))
+            {
+                MessageBox.Show("Please enter a valid path", "", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.ServiceNotification);
+                return "";
+            }
+            System.IO.FileInfo info = new FileInfo(importFile.FileName);
+            var getPath = info.FullName;
+            if (btnImport != null)
+            {
+                txtImport.Text = getPath.ToString();
+            }
+            repo.ReadExcel(importFile.FileName);
+            return importFile.FileName.ToString();
+        }
+
+        private void btnImport_Click(object sender, RoutedEventArgs e)
+        {
+            if (btnImport != null)
+                importBrowseDataFile();
+            //call a method to read all file extensions, separate methods for each file extension.
+
+        }
+
+
 
     }
 }
