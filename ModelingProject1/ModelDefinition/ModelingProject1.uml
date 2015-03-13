@@ -1,0 +1,1245 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<modelStoreModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm9="http://schemas.microsoft.com/dsltools/UseCaseModel"
+  dslVersion="1.0.0.0"
+  Id="a3ee4174-aa19-4daa-8654-616281c94958"
+  name="ModelingProject1" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <profileInstances>
+    <packageHasProfileInstances
+      Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b">
+      <profileInstance
+        Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791"
+        name="StandardProfileL2" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances
+      Id="29349502-908c-4fda-9054-c48619c59ed0">
+      <profileInstance
+        Id="532ea607-fb19-44b8-8502-3351b05452be"
+        name="StandardProfileL3" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <packageHasNamedElement>
+      <subsystem
+        Id="d04d9cb5-2948-419b-a3e2-18d773e7de8f"
+        name="Pdf Generator System -"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <actor
+        Id="e432d0eb-237f-487c-930c-815a4526b0f8"
+        name="Generic User"
+        isAbstract="false"
+        isLeaf="false">
+        <targetEnds>
+          <association
+            Id="7621baf2-6053-426c-91b2-ecbfad21246a"
+            isDerived="false"
+            sourceEndRoleName="Senior Lecturer"
+            targetEndRoleName="Upload xml template"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="fe03a427-4559-4992-a02a-680196b74aa6"
+              LastKnownName="Upload xml template"
+              LastKnownLocation="ModelingProject1.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="ce09d661-414e-4ff1-905c-043e99d34415"
+                  name="Senior Lecturer"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="35180d1b-9f81-47b0-acf6-87ba533060ac"
+                  name="Upload xml template"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="8d138c61-521b-4c92-84fc-360997633750"
+            isDerived="false"
+            sourceEndRoleName="Senior Lecturer"
+            targetEndRoleName="Specify output Directory"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="4a04527e-4b95-4a13-bc47-7b4da02d5af2"
+              LastKnownName="Specify output Directory"
+              LastKnownLocation="ModelingProject1.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="35c73183-b7d0-406a-9ddf-4980d81f4d7b"
+                  name="Senior Lecturer"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="969f7c77-7d37-4a61-b5b3-4a79c6d4b3d6"
+                  name="Specify output Directory"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="53a81304-f06f-4a0b-bafb-4bc7ab876a99"
+            isDerived="false"
+            sourceEndRoleName="Senior Lecturer"
+            targetEndRoleName="Select Generate pdf "
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="4db5092c-c3c8-497b-bd04-63955f6cc9ea"
+              LastKnownName="Generate pdf "
+              LastKnownLocation="ModelingProject1.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="5f3f3ea9-0085-463b-973a-6dddb6ff1837"
+                  name="Senior Lecturer"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="e20bafd0-c38d-413e-9c12-9c456aabb805"
+                  name="Select Generate pdf "
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="d49986a3-e3a7-407b-b98a-21521cc7df24"
+            isDerived="false"
+            sourceEndRoleName="Generic User"
+            targetEndRoleName="Tracks progress of Job through progress bar"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="1f37b178-40b7-4916-8ab1-81eea87c4133"
+              LastKnownName="Tracks progress of Job through progress bar"
+              LastKnownLocation="ModelingProject1.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="8db7691b-42db-49a3-82ae-a8dd6233c022"
+                  name="Generic User"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="12eb73fc-c1a6-44b9-83b1-924b0f19034f"
+                  name="Tracks progress of Job through progress bar"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="cbb12a9d-becc-4ebe-b768-e8c3e8e907f7"
+            isDerived="false"
+            sourceEndRoleName="Generic User"
+            targetEndRoleName="Reviews a preview of the generated pdf"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="66aac539-bb83-4e5e-a852-aefd703f1dad"
+              LastKnownName="Reviews a preview of the generated pdf"
+              LastKnownLocation="ModelingProject1.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="ac558a56-fe15-45ed-a38b-11fcd6c2794f"
+                  name="Generic User"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="ed88e749-71f0-4958-bbf6-f40e7e1588b2"
+                  name="Reviews a preview of the generated pdf"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="ca4face6-2895-4ad9-a84d-bcbc0c6cf56d"
+            isDerived="false"
+            sourceEndRoleName="Generic User"
+            targetEndRoleName="Retrieves generated pdf from destination path"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="ac6d373d-b542-4eb8-96c8-22e4cd5a5300"
+              LastKnownName="Retrieves generated pdf from destination path"
+              LastKnownLocation="ModelingProject1.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="198bea0c-7f8c-4d33-b05d-b12da788c0a0"
+                  name="Generic User"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="bb1d0d57-0505-445d-bb6c-03b95dff429d"
+                  name="Retrieves generated pdf from destination path"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="81a7bc7d-bad8-4f1f-b4f8-add6f3494ead"
+            isDerived="false"
+            sourceEndRoleName="Generic User"
+            targetEndRoleName="Define xml templates "
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="9c459797-65b9-4d1f-a463-1c1ba93fe9b1"
+              LastKnownName="Define xml templates "
+              LastKnownLocation="ModelingProject1.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="d831d8b2-1396-4b36-b2d5-be63451094ab"
+                  name="Generic User"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="464f2e9c-dd17-4b0f-98f0-76c9f9bc287a"
+                  name="Define xml templates "
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="109cca93-cbbf-4e72-92ec-95d6d6bfc299"
+            isDerived="false"
+            sourceEndRoleName="Generic User"
+            targetEndRoleName="Preview generated pdf document "
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="36950972-6e9a-4e34-b29a-94b4eecfb2c3"
+              LastKnownName="Preview generated pdf document "
+              LastKnownLocation="ModelingProject1.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="04410048-407c-4b8b-ae2f-efcd40aa8140"
+                  name="Generic User"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="8be8b95f-5747-466d-9dd0-17d3d9b54975"
+                  name="Preview generated pdf document "
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+      </actor>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="fe03a427-4559-4992-a02a-680196b74aa6"
+        name="Upload xml template"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="d04d9cb5-2948-419b-a3e2-18d773e7de8f"
+            LastKnownName="Pdf Generator System -"
+            LastKnownLocation="ModelingProject1.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="4a04527e-4b95-4a13-bc47-7b4da02d5af2"
+        name="Specify output Directory"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="d04d9cb5-2948-419b-a3e2-18d773e7de8f"
+            LastKnownName="Pdf Generator System -"
+            LastKnownLocation="ModelingProject1.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="9c459797-65b9-4d1f-a463-1c1ba93fe9b1"
+        name="Define xml templates "
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="d04d9cb5-2948-419b-a3e2-18d773e7de8f"
+            LastKnownName="Pdf Generator System -"
+            LastKnownLocation="ModelingProject1.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="4db5092c-c3c8-497b-bd04-63955f6cc9ea"
+        name="Generate pdf "
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="d04d9cb5-2948-419b-a3e2-18d773e7de8f"
+            LastKnownName="Pdf Generator System -"
+            LastKnownLocation="ModelingProject1.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="ac6d373d-b542-4eb8-96c8-22e4cd5a5300"
+        name="Retrieves generated pdf from destination path"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="d04d9cb5-2948-419b-a3e2-18d773e7de8f"
+            LastKnownName="Pdf Generator System -"
+            LastKnownLocation="ModelingProject1.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <actor
+        Id="bea95c04-6fe3-4a80-8fcc-6f40ad17fcb7"
+        name="Generic User"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="1f37b178-40b7-4916-8ab1-81eea87c4133"
+        name="Tracks progress of Job through progress bar"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <actor
+        Id="60c892ee-8e5b-4429-9629-bbb2c34c33a5"
+        name="Generic User"
+        isAbstract="false"
+        isLeaf="false">
+        <targetEnds>
+          <association
+            Id="91903304-3bee-435f-a7b1-ca1b2c367e13"
+            isDerived="false"
+            sourceEndRoleName="Generic User"
+            targetEndRoleName="Review of each job listed "
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="3fa79765-be85-4809-9545-67da8824c98d"
+              LastKnownName="Review of each job listed "
+              LastKnownLocation="ModelingProject1.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="4e04fcbf-5acd-4079-9f46-a82422b08811"
+                  name="Generic User"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="07e75cf1-ffd3-44f4-a1d8-428d3ce6258b"
+                  name="Review of each job listed "
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="80a02852-af10-4712-9a66-90df900b8bb2"
+            isDerived="false"
+            sourceEndRoleName="Generic User"
+            targetEndRoleName="Upload a valid xml template(.pdfx)"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="5cf83f8a-c2c0-4d24-ae4e-bbff4c631bbf"
+              LastKnownName="Upload a valid xml template(.pdfx)"
+              LastKnownLocation="ModelingProject1.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="a299c897-90c7-4407-bf26-3cb796f72cb8"
+                  name="Generic User"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="9bda6a70-dd28-4869-81cd-d2a224cc1c1b"
+                  name="Upload a valid xml template(.pdfx)"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="b2c51d67-486b-4c66-a9a7-65ee724f6cef"
+            isDerived="false"
+            sourceEndRoleName="Generic User"
+            targetEndRoleName="Select Generate Pdf"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="2c0eec7c-c72e-43a1-ae43-6563f3b17d75"
+              LastKnownName="Select Generate Pdf"
+              LastKnownLocation="ModelingProject1.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="cd9c8549-a472-49c7-8e13-5d9dbae13265"
+                  name="Generic User"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="94b01ddc-8d99-49a2-adfc-7324e9da2042"
+                  name="Select Generate Pdf"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="68adf820-3ba0-42f3-b2c9-820cb7005a64"
+            isDerived="false"
+            sourceEndRoleName="Generic User"
+            targetEndRoleName="User Reviews allocated Jobs "
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="49fb32bd-3f79-4743-948a-e2fe81b1ee26"
+              LastKnownName="User Reviews Finished Jobs "
+              LastKnownLocation="ModelingProject1.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="658c0d5c-ebe3-48ec-bb26-53561ff84647"
+                  name="Generic User"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="70b8211e-1e18-480f-bca9-5cb361850ddb"
+                  name="User Reviews allocated Jobs "
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="4c0bb2de-c7a1-4c52-a3f4-55c7d305b636"
+            isDerived="false"
+            sourceEndRoleName="Generic User"
+            targetEndRoleName="Retrieves generated pdf from destination path"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="ac6d373d-b542-4eb8-96c8-22e4cd5a5300"
+              LastKnownName="Retrieves generated pdf from destination path"
+              LastKnownLocation="ModelingProject1.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="b8caaa82-4b66-47f4-99fd-e3732e0edf58"
+                  name="Generic User"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="847afd22-854c-4fc9-9bf4-897ac67546b3"
+                  name="Retrieves generated pdf from destination path"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="1ce161a7-35f5-4571-af39-5fee3e21cac8"
+            isDerived="false"
+            sourceEndRoleName="Generic User"
+            targetEndRoleName="Define xml templates "
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="9c459797-65b9-4d1f-a463-1c1ba93fe9b1"
+              LastKnownName="Define xml templates "
+              LastKnownLocation="ModelingProject1.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="f2b6217d-c8c0-421e-b001-deeb52b7ed3e"
+                  name="Generic User"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="e302a0a1-97cc-432a-8e96-938e9f4851ce"
+                  name="Define xml templates "
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+      </actor>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <subsystem
+        Id="28d3d1a2-b15a-4cc9-b8c6-acb2877e9bb9"
+        name="Pdf Generator System - Batch Processing"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="687b7786-b42e-4950-927f-9ed5b0d2957d"
+        name="Track progress for each job in a batch "
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="5cf83f8a-c2c0-4d24-ae4e-bbff4c631bbf"
+        name="Upload a valid xml template(.pdfx)"
+        isAbstract="false"
+        isLeaf="false">
+        <extendedCases>
+          <extend
+            Id="dc9b4ea9-6ff1-4e7c-9bce-0ab75ee389a7">
+            <useCaseMoniker
+              Id="b97b04b3-5fbd-4383-ae8a-51a0dcd2490d"
+              LastKnownName="User Defined template with styles and queries"
+              LastKnownLocation="ModelingProject1.uml" />
+          </extend>
+        </extendedCases>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="b97b04b3-5fbd-4383-ae8a-51a0dcd2490d"
+        name="User Defined template with styles and queries"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="1e3f5094-d967-4e7b-b64e-dfaa637596d8"
+        name="Select generate pdf"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="66aac539-bb83-4e5e-a852-aefd703f1dad"
+        name="Reviews a preview of the generated pdf"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="3fa79765-be85-4809-9545-67da8824c98d"
+        name="Review of each job listed "
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="2c0eec7c-c72e-43a1-ae43-6563f3b17d75"
+        name="Select Generate Pdf"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="49fb32bd-3f79-4743-948a-e2fe81b1ee26"
+        name="User Reviews Finished Jobs "
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <activity
+        Id="77fbb92a-fba5-4e77-8e52-dd101ff54d5c"
+        name="Activity1"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false"
+        isReentrant="false"
+        isReadOnly="false"
+        isSingleExecution="false">
+        <nodes>
+          <initialNode
+            Id="363de274-491b-4f9c-9057-285e800374ca"
+            name="Initial1"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="e4924e36-69dd-4492-9179-4c3da785ebb7"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="ffee32bd-0a26-4e60-a452-ad3483e7a10e"
+                  LastKnownName="Action1"
+                  LastKnownLocation="ModelingProject1.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </initialNode>
+          <opaqueAction
+            Id="ffee32bd-0a26-4e60-a452-ad3483e7a10e"
+            name="Action1"
+            isLeaf="false" />
+        </nodes>
+      </activity>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="36950972-6e9a-4e34-b29a-94b4eecfb2c3"
+        name="Preview generated pdf document "
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="d04d9cb5-2948-419b-a3e2-18d773e7de8f"
+            LastKnownName="Pdf Generator System -"
+            LastKnownLocation="ModelingProject1.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <actor
+        Id="1b4cf082-cb4b-497e-b7b1-0d3400764da6"
+        name="Actor1"
+        isAbstract="false"
+        isLeaf="false">
+        <suppliersInternal>
+          <dependency
+            Id="70f043ed-2eb6-433c-a391-87ad46f3e030">
+            <useCaseMoniker
+              Id="90c0cd31-01b6-4ad2-97c6-67ab0b351f8e"
+              LastKnownName="Customise Email"
+              LastKnownLocation="ModelingProject1.uml" />
+          </dependency>
+          <dependency
+            Id="25c8172f-e659-4cde-b47a-6bd8ec189d85">
+            <useCaseMoniker
+              Id="e5004752-da24-434a-adf1-57facf181b65"
+              LastKnownName="Upload Excel SpreadSheet"
+              LastKnownLocation="ModelingProject1.uml" />
+          </dependency>
+          <dependency
+            Id="afb78843-cca9-4cda-a87a-9ef73975be77">
+            <useCaseMoniker
+              Id="796e0a29-f9e8-4755-b7de-f13eb7dcddc7"
+              LastKnownName="Send Email with AttachedDocument"
+              LastKnownLocation="ModelingProject1.uml" />
+          </dependency>
+        </suppliersInternal>
+        <targetEnds>
+          <association
+            Id="6f7a3663-1e09-42d1-a35b-b4460dc66525"
+            isDerived="false"
+            sourceEndRoleName="Actor1"
+            targetEndRoleName="Define xml templates"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="39bd0d1d-61af-4155-827f-12aebe445905"
+              LastKnownName="Define xml templates"
+              LastKnownLocation="ModelingProject1.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="bca31eea-d5c0-4fcb-ae1f-3fcb2e5014b2"
+                  name="Actor1"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="2574855b-0a61-423c-849a-2aa5017d0259"
+                  name="Define xml templates"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="8bf8be3a-5625-43e2-8c05-0cf162c05df7"
+            isDerived="false"
+            sourceEndRoleName="Actor1"
+            targetEndRoleName="Upload Xml template"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="34d42e72-fa8e-4622-8e90-67e1a98fd252"
+              LastKnownName="Upload Xml template"
+              LastKnownLocation="ModelingProject1.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="08710c59-1c4d-43eb-9537-b34170113bd9"
+                  name="Actor1"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="c494ebd2-16b6-495d-b26b-9405e1ac224b"
+                  name="Upload Xml template"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="0fcaa309-472d-4875-bfe0-fdbe1acc4177"
+            isDerived="false"
+            sourceEndRoleName="Actor1"
+            targetEndRoleName="Specifiy output Directory"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="ce54b536-6433-43c5-87e7-8cc19f73529e"
+              LastKnownName="Specifiy output Directory"
+              LastKnownLocation="ModelingProject1.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="c21f67c6-c0b4-418d-ad22-848c2de0156a"
+                  name="Actor1"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="aa120870-3d80-45ad-a6c6-9116e461478b"
+                  name="Specifiy output Directory"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="e139e787-a79f-4539-9eb8-a2c951fa7a19"
+            isDerived="false"
+            sourceEndRoleName="Actor1"
+            targetEndRoleName="Select Generate pdf"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="33085203-d6a5-48d0-872b-e2c63b4d1c71"
+              LastKnownName="Select Generate pdf"
+              LastKnownLocation="ModelingProject1.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="cbc89248-2dfd-4207-b3b0-48ef5b5af21d"
+                  name="Actor1"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="10fa4233-3f70-4998-8519-67e626a0007b"
+                  name="Select Generate pdf"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="6096ff85-9652-4422-b542-b3b0d0bc37f9"
+            isDerived="false"
+            sourceEndRoleName="Actor1"
+            targetEndRoleName="Previews pdf in browser before retreiving output file"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="ee1b3b98-f1d5-4d62-bbe1-7fc789323503"
+              LastKnownName="Previews pdf in browser before retreiving output file"
+              LastKnownLocation="ModelingProject1.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="ec6124d3-7e7f-422e-989f-539c7b318936"
+                  name="Actor1"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="fbb85b37-ca99-4261-bb4a-46ba56e0e13c"
+                  name="Previews pdf in browser before retreiving output file"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="d62b162f-a220-49ab-8e25-f10490c2f83e"
+            isDerived="false"
+            sourceEndRoleName="Actor1"
+            targetEndRoleName="Retrieves generated pdf from destination path"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="3b1f0f8f-2604-4e0b-ae78-3c8cf518623d"
+              LastKnownName="Retrieves generated pdf from destination path"
+              LastKnownLocation="ModelingProject1.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="589d9dde-dc76-4602-8e5e-ab6cd0346ea0"
+                  name="Actor1"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="0e3e84ce-8298-41b3-b769-c68a77d827f5"
+                  name="Retrieves generated pdf from destination path"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+      </actor>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="39bd0d1d-61af-4155-827f-12aebe445905"
+        name="Define xml templates"
+        isAbstract="false"
+        isLeaf="false">
+        <extendedCases>
+          <extend
+            Id="62984845-0821-4195-a6dc-1b5a736c7633">
+            <useCaseMoniker
+              Id="9af65a68-5f68-43c8-99d6-c6e428b81ef7"
+              LastKnownName="Save Xml Templates"
+              LastKnownLocation="ModelingProject1.uml" />
+          </extend>
+        </extendedCases>
+        <subjects>
+          <subsystemMoniker
+            Id="e25a00fd-7d1d-4bb9-a428-c49b79341637"
+            LastKnownName="Pdf Generator"
+            LastKnownLocation="ModelingProject1.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <subsystem
+        Id="e25a00fd-7d1d-4bb9-a428-c49b79341637"
+        name="Pdf Generator"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="34d42e72-fa8e-4622-8e90-67e1a98fd252"
+        name="Upload Xml template"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="e25a00fd-7d1d-4bb9-a428-c49b79341637"
+            LastKnownName="Pdf Generator"
+            LastKnownLocation="ModelingProject1.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="ce54b536-6433-43c5-87e7-8cc19f73529e"
+        name="Specifiy output Directory"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="e25a00fd-7d1d-4bb9-a428-c49b79341637"
+            LastKnownName="Pdf Generator"
+            LastKnownLocation="ModelingProject1.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="33085203-d6a5-48d0-872b-e2c63b4d1c71"
+        name="Select Generate pdf"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="e25a00fd-7d1d-4bb9-a428-c49b79341637"
+            LastKnownName="Pdf Generator"
+            LastKnownLocation="ModelingProject1.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="ee1b3b98-f1d5-4d62-bbe1-7fc789323503"
+        name="Previews pdf in browser before retreiving output file"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="e25a00fd-7d1d-4bb9-a428-c49b79341637"
+            LastKnownName="Pdf Generator"
+            LastKnownLocation="ModelingProject1.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="3b1f0f8f-2604-4e0b-ae78-3c8cf518623d"
+        name="Retrieves generated pdf from destination path"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="e25a00fd-7d1d-4bb9-a428-c49b79341637"
+            LastKnownName="Pdf Generator"
+            LastKnownLocation="ModelingProject1.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="90c0cd31-01b6-4ad2-97c6-67ab0b351f8e"
+        name="Customise Email"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="e25a00fd-7d1d-4bb9-a428-c49b79341637"
+            LastKnownName="Pdf Generator"
+            LastKnownLocation="ModelingProject1.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="e5004752-da24-434a-adf1-57facf181b65"
+        name="Upload Excel SpreadSheet"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="e25a00fd-7d1d-4bb9-a428-c49b79341637"
+            LastKnownName="Pdf Generator"
+            LastKnownLocation="ModelingProject1.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="796e0a29-f9e8-4755-b7de-f13eb7dcddc7"
+        name="Send Email with AttachedDocument"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="e25a00fd-7d1d-4bb9-a428-c49b79341637"
+            LastKnownName="Pdf Generator"
+            LastKnownLocation="ModelingProject1.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="9af65a68-5f68-43c8-99d6-c6e428b81ef7"
+        name="Save Xml Templates"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="e25a00fd-7d1d-4bb9-a428-c49b79341637"
+            LastKnownName="Pdf Generator"
+            LastKnownLocation="ModelingProject1.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+  </packagedElements>
+  <primitiveType
+    Id="220a3521-e091-4221-bae9-3ef9018e845c"
+    name="Integer"
+    isAbstract="false"
+    isLeaf="false" />
+  <primitiveType
+    Id="8943dc84-709e-4f62-b15a-a3273aa6f165"
+    name="Boolean"
+    isAbstract="false"
+    isLeaf="false" />
+  <primitiveType
+    Id="59259974-6d55-42c6-b7bd-763d77ac8ef9"
+    name="String"
+    isAbstract="false"
+    isLeaf="false" />
+  <primitiveType
+    Id="3ab42e7d-4969-445a-b209-471f5cb8209c"
+    name="UnlimitedNatural"
+    isAbstract="false"
+    isLeaf="false" />
+</modelStoreModel>

@@ -23,7 +23,9 @@ using Scryber.Text;
 using Scryber.Generation;
 using Microsoft.Win32;
 using System.IO;
+using System.Windows.Media.Animation;
 using System.Data;
+using ICSharpCode.AvalonEdit;
 
 namespace PDFGenerator
 {
@@ -35,19 +37,14 @@ namespace PDFGenerator
         System.Windows.Forms.FolderBrowserDialog FolderBrowser = new System.Windows.Forms.FolderBrowserDialog();
 
         System.Windows.Forms.NotifyIcon notify = new System.Windows.Forms.NotifyIcon();
-        //dialogs for multiple Processing of pdf documents
         OpenFileDialog fileDialog = new OpenFileDialog();
         System.Windows.Forms.FolderBrowserDialog folderBrowserM = new System.Windows.Forms.FolderBrowserDialog();
-
+        Window1 window = new Window1();
         OpenFileDialog importFile = new OpenFileDialog();
-
         public MainWindow()
         {
             InitializeComponent();
-
         }
-
-
         private void Notify_MouseDoubleClick(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             this.WindowState = System.Windows.WindowState.Normal;
@@ -69,31 +66,9 @@ namespace PDFGenerator
                 this.ShowInTaskbar = true;
             }
         }
-        private void UploadTab_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private String BrowseXmlFile()
         {
-
-        }
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-        private void BrowseSelectedFiles()
-        {
-
-
-        }
-        private void txtPath_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-        private void txtFilePath_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            //make it editable for users to enter path if known and press enter;;;;;;;????
-        }
-        private String BrowseXmlFile()//also used for reading xml files.
-        {
-            OpenDialog.Filter = "Pdfx Files(.pdfx)|*.pdfx";//file must be in pdfx in order to to fully parsed and content preserved.
-            //maybe uplooad more than one template per file in the form of an archive.//maybe extract it to a temporary directory grab the file accordingly.
+            OpenDialog.Filter = "Pdfx Files(.pdfx)|*.pdfx";
             OpenDialog.FilterIndex = 1;
             OpenDialog.Multiselect = false;
             Nullable<bool> showOut = OpenDialog.ShowDialog();
@@ -106,10 +81,8 @@ namespace PDFGenerator
             System.IO.FileInfo info = new FileInfo(OpenDialog.FileName);
             var getPath = info.FullName;
             if (btnUploadXml != null) { btnXmlBrowse.Text = getPath; }
-            //if (btnGenerate != null) { txtFileUploadPath.Text = getPath; }
             return OpenDialog.FileName.ToString();
         }
-        //Batch Processing
         private String BrowseXmlFileBatch()
         {
             fileDialog.Filter = "Pdfx Files(.pdfx)|*.pdfx";
@@ -125,29 +98,28 @@ namespace PDFGenerator
             System.IO.FileInfo info = new FileInfo(fileDialog.FileName);
             var getPath = info.FullName;
             if (btnUploadTemplate != null) { txtFileUploadPath.Text = getPath.ToString(); }
-            //if(btnGen != null){ }
             return fileDialog.FileName;
         }
         private String GetFileName(OpenFileDialog dialog)
         {
             return dialog.SafeFileName;
         }
-        private void CreatePdf(String Destination, String SafeFilename)
+
+        private String CreatePdf(String Destination, String SafeFilename)
         {
             SafeFilename = OpenDialog.FileName;
             var CreatePdf = new ConvertToPdf(SafeFilename, Destination);
             CreatePdf.CreatePdfFromPDFX();
+            return CreatePdf.CreatePdfFromPDFX().ToString();
         }
 
         private String SpecifyDestinationPath()
         {
-            //filename is the pdf equivalent.
             FolderBrowser.ShowNewFolderButton = true;
             System.Windows.Forms.DialogResult result = FolderBrowser.ShowDialog();
             if (result.ToString() == "OK" && btnGenerate != null) { txtDestination.Text = FolderBrowser.SelectedPath; }
             return FolderBrowser.SelectedPath;
         }
-        //Batch Processing
         private String SpecifyDestPathForBatch()
         {
             folderBrowserM.ShowNewFolderButton = true;
@@ -168,22 +140,14 @@ namespace PDFGenerator
         {
             if (btnDestPath != null) { SpecifyDestinationPath(); btnGenerate.IsEnabled = true; }
         }
-        //Alter table to add in a SUN number and map it to the filename
-        //private String CreateFileCredentials() {
-        //generate a filename based on a SUN id......
-        //}
         private void btnGenerate_Click(object sender, RoutedEventArgs e)
         {
             if (btnGenerate != null)
             {
-                for (int i = 0; i < 100; i++)
-                {
-                    //create a progress bar for each allocated job..
-                    progressBar.Value++;//has created empty pdf files but corrupt ones..
-                }
                 CreatePdf(FolderBrowser.SelectedPath, String.Format("")); System.Threading.Thread.Sleep(100);
                 MessageBox.Show("Your File has been Created", "", MessageBoxButton.OK);
-                //run process to show up windows explorer and to the relevant files....
+                var path = CreatePdf(FolderBrowser.SelectedPath, OpenDialog.FileName).ToString();
+                this.webBrowser.Navigate(path);
             }
         }
         private void btnUploadTemplate_Click(object sender, RoutedEventArgs e)
@@ -212,17 +176,17 @@ namespace PDFGenerator
             }
             catch (Exception exception)
             {
-                Console.WriteLine(String.Format("{0}", exception.InnerException));
+                MessageBox.Show("" + exception.InnerException, "", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
             }
         }
         private void btnGen_Click(object sender, RoutedEventArgs e)
         {
             if (btnGen != null)
+            {
                 this.ListAllJobs.IsEnabled = true;
-            processGenButton(fileDialog.FileName, folderBrowserM.SelectedPath);
-            //var iconHandle =
-            //notify.Icon = new System.Drawing.Icon(String.Format("{0}"));
-            //notify.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(Notify_MouseDoubleClick);
+                processGenButton(fileDialog.FileName, folderBrowserM.SelectedPath);
+                MessageBox.Show("Your Documents have been produced", "", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
+            }
         }
 
         private void DataGrid1_Loaded(object sender, RoutedEventArgs e)
@@ -232,20 +196,21 @@ namespace PDFGenerator
 
         private void ListAllJobs_Click(object sender, RoutedEventArgs e)
         {
-            var repo = new Repository(fileDialog.FileName, folderBrowserM.SelectedPath);
-            //var check = repo.Progress;
-            //kick off progress bars and display notifyIcon but first message box
+
         }
 
         private String importBrowseDataFile()
         {
             var repo = new Repository(fileDialog.FileName, folderBrowserM.SelectedPath);
-            importFile.Filter = "Files(*.xls,*.xlsx, *.csv,*.xml) | *.xls;*.xlsx;*.csv,*.xml";
+            importFile.Filter = "Files(*.xlsx, *.csv,*.xml) | *.xlsx;*.csv,*.xml";
             importFile.FilterIndex = 1;
             importFile.Multiselect = false;
             Nullable<bool> showOut = importFile.ShowDialog();
+            progressBar2.IsIndeterminate = true;
             if (showOut == true)
+            {
                 importFile.OpenFile();
+            }
             if (importFile.FileName.Equals(""))
             {
                 MessageBox.Show("Please enter a valid path", "", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.ServiceNotification);
@@ -253,23 +218,41 @@ namespace PDFGenerator
             }
             System.IO.FileInfo info = new FileInfo(importFile.FileName);
             var getPath = info.FullName;
-            if (btnImport != null)
-            {
-                txtImport.Text = getPath.ToString();
-            }
-            repo.ReadExcel(importFile.FileName);
+            txtImport.Text = getPath.ToString();
+            repo.ReadExcelFields(importFile.FileName);
+            MessageBox.Show("Your File has been Imported and your documents are now ready to be produced.", "", MessageBoxButton.OK, MessageBoxImage.Information);
             return importFile.FileName.ToString();
         }
 
         private void btnImport_Click(object sender, RoutedEventArgs e)
         {
+            var repo = new Repository(fileDialog.FileName, folderBrowserM.SelectedPath);
             if (btnImport != null)
+            {
                 importBrowseDataFile();
-            //call a method to read all file extensions, separate methods for each file extension.
+                progressBar2.IsIndeterminate = false;
+            }
+        }
+
+        private void btnShowLocationDocuments_Click(object sender, RoutedEventArgs e)
+        {
 
         }
 
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            window.Show();
+        }
 
-
+        private void btnSubmit_Click(object sender, RoutedEventArgs e)
+        {
+            if (btnSubmit != null)
+            {
+                String Subject = txtSubject.Text;
+                String EmailBody = txtContent.Text;
+                var sendEmail = new SendEmail(Subject, EmailBody);
+                MessageBox.Show("Information has been cofirmed and will be contained in a Distpacthed Email", "", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
+            }
+        }
     }
 }

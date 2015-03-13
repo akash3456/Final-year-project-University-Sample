@@ -1,9 +1,11 @@
 ﻿using System;
 using System.IO;
 using System.Data;
-using Scryber.Components;
 using System.Text.RegularExpressions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using ClosedXML.Excel;
+using Outlook = Microsoft.Office.Interop.Outlook;
+
 
 namespace PdfGeneratorTests
 {
@@ -55,7 +57,7 @@ namespace PdfGeneratorTests
                 var outputPath = String.Format(@"{0}\{1}.pdf", DestinationPath, Guid.NewGuid().ToString());
                 var stream = new FileStream(outputPath, FileMode.CreateNew, FileAccess.ReadWrite);
 
-                using (PDFDocument document = PDFDocument.ParseDocument(fileName))
+                using (Scryber.Components.PDFDocument document = Scryber.Components.PDFDocument.ParseDocument(fileName))
                 {
                     document.Items["Firstname"] = dto.getFirstName;
                     document.Items["Secondname"] = dto.getSecondYearGrade;
@@ -71,8 +73,7 @@ namespace PdfGeneratorTests
                 connect.Close();
             }
         }
-        //write unit
-        //tests to generate financial statements as well like material supervisor provided me with..
+
         [TestMethod]
         public void LogError()
         {
@@ -83,7 +84,7 @@ namespace PdfGeneratorTests
             }
             catch (Exception exception)
             {
-                //insert into log file for inspection
+                File.WriteAllText("C:\test.txt", exception.InnerException.ToString());
             }
         }
         [TestMethod]
@@ -110,6 +111,20 @@ namespace PdfGeneratorTests
         }
 
         [TestMethod]
+        public void isValidEmail()
+        {
+            String email = "paula@aston.ac.uk";
+            if (Regex.IsMatch(email, @"^(?("")(""[^""]+?""@)|(([0-9a-z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-z])@)(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-z][-\w]*[0-9a-z]*\.)+[a-z0-9]{2,17}))$)", RegexOptions.IgnoreCase))
+            {
+                Assert.IsTrue(true, "Valid email");
+            }
+            else
+            {
+                Assert.IsFalse(false, "Email is not valid");
+            }
+        }
+
+        [TestMethod]
         public void OutputFileProcessing()
         {
             var extension = String.Format(@"^.*\.(pdf|PDF)");
@@ -126,12 +141,84 @@ namespace PdfGeneratorTests
             }
         }
         [TestMethod]
-        public void ImportData() { 
-        
+        public void ImportData()
+        {
+            var ExcelFile = String.Format(@"C:\Users\Akash Paul\Documents\ProperData.xlsx");
+            var regexPattern = @"^.*\.(xlsx|XLSX)";
+            using (var workbook = new XLWorkbook(ExcelFile))
+            {
+
+                if (Regex.IsMatch(ExcelFile, regexPattern))
+                {
+                    Assert.IsTrue(true, "File is a valid Input File");
+                }
+                else
+                {
+                    Assert.IsFalse(false, "File is not a valid input file and must be xlsx extension");
+                }
+            }
+        }
+        [TestMethod]
+        public void SendEmail()
+        {
+            String document = @"C:\Users\Akash Paul\Testing\8db420f4-d1fa-48f6-8d9c-646ba2329086.pdf";
+            String email = "paula@aston.ac.uk";
+            Outlook.Recipients mailrecipient = null;
+            Outlook.MailItem mail = null;
+            Outlook.Recipient rec = null;
+            Outlook.Application app = new Outlook.Application();
+            mail = app.CreateItem(Microsoft.Office.Interop.Outlook.OlItemType.olMailItem) as Outlook.MailItem;
+            mail.Subject = String.Format("Official Transcript");
+            Outlook.Attachment attch = mail.Attachments.Add(document);
+            mailrecipient = mail.Recipients;
+            rec = mailrecipient.Add(email);
+            rec.Resolve();
+            mail.Send();
+        }
+        [TestMethod]
+        public void SaveFile()
+        {
+            String DocumentContents = String.Format("<?xml version='1.0' encoding='utf-8' ?>" + "\n"
+                    + "<pdf:Document xmlns:pdf='Scryber.Components, Scryber.Components, Version=0.8.0.0, Culture=neutral, PublicKeyToken=872cbeb81db952fe'" + "\n" + "xmlns:styles='Scryber.Styles, Scryber.Styles, Version=0.8.0.0, Culture=neutral, PublicKeyToken=872cbeb81db952fe'>"
+                    + "\n"
+                    + "<Info><Title></Title></Info>" + "\n"
+                    + "<Styles></Styles>" + "\n"
+                    + "<Pages> </Pages>" + "\n"
+                    + "\n"
+                    + "</pdf:Document>");
+            System.IO.File.WriteAllText(@"C:\Users\Akash Paul\Testing\test.pdfx", DocumentContents);
+        }
+        [TestMethod]
+        public void SpecialEditorTest()
+        {
+            var Extension = String.Format(@"^.*\.(pdfx|PDFX)");
+            if (Regex.IsMatch(@"C:\Users\Akash Paul\Testing\test.pdfx", Extension))
+            {
+                Assert.IsTrue(true, "Template is valid extension and can be saved in editor");
+            }
+            else
+            {
+                Assert.IsFalse(false, "File cannot be saved through editor as not a valid .pdfx");
+            }
+        }
+        [TestMethod]
+        public void OpenFileInEditor()
+        {
+            String documentPath = @"C:\Users\Akash Paul\Dropbox\XMLFile1.pdfx";
+
+
         }
 
         [TestMethod]
-        public void SendEmail() { }
+        public void importFileIntoDatabase()
+        {
 
+
+        }
+        public void ProducePDFDocumentWithImage()
+        {
+
+
+        }
     }
 }

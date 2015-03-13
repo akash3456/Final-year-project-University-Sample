@@ -1,0 +1,230 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<useCaseModelRoot xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="3eb1b629-5eea-4c3a-892d-518442f69318" name="UMLUseCaseDiagram1" linkedPackageId="8acf38c5-163c-43ef-a163-2a5c41446569" xmlns="http://schemas.microsoft.com/dsltools/UseCaseModel">
+  <packagedElements>
+    <useCaseModelRootHasTypes>
+      <actor Id="623f5e10-76a5-4ceb-ba55-a8fb29131aeb" name="Actor1" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="1b4cf082-cb4b-497e-b7b1-0d3400764da6" />
+        <suppliersInternal>
+          <dependency Id="f5cd0b75-5c88-4b55-9bbe-399b280b0501">
+            <useCaseMoniker Id="e9c1da6d-bd68-4ddb-884e-b50cb0b1ee62" LastKnownName="Customise Email" />
+            <elementDefinition Id="70f043ed-2eb6-433c-a391-87ad46f3e030" />
+          </dependency>
+          <dependency Id="0aa24724-02e0-4dfc-83cd-dbeeaaa8a280">
+            <useCaseMoniker Id="8014f8f4-dd85-40e4-be65-e07cc15fe20c" LastKnownName="Upload Excel SpreadSheet" />
+            <elementDefinition Id="25c8172f-e659-4cde-b47a-6bd8ec189d85" />
+          </dependency>
+          <dependency Id="ea71f602-d77e-40c1-bd8b-c6a28edad335">
+            <useCaseMoniker Id="c9eebaf8-3d5a-49b2-8a0d-de83603875a3" LastKnownName="Send Email with AttachedDocument" />
+            <elementDefinition Id="afb78843-cca9-4cda-a87a-9ef73975be77" />
+          </dependency>
+        </suppliersInternal>
+        <targetEnds>
+          <association Id="dc6a54ef-a0a9-4629-bb5d-da46c788c345" isDerived="false" sourceEndRoleName="Actor1" targetEndRoleName="Define xml templates" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="3ca0536e-6a59-49dd-bcb0-daf5d2282381" LastKnownName="Define xml templates" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="dc4b1d6f-2e35-4509-9d93-5c3c1d0a42da" name="Actor1" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="bca31eea-d5c0-4fcb-ae1f-3fcb2e5014b2" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="7008a492-6200-4823-9d14-3db511fe6943" name="Define xml templates" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="2574855b-0a61-423c-849a-2aa5017d0259" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="6f7a3663-1e09-42d1-a35b-b4460dc66525" />
+          </association>
+          <association Id="39c9017a-c6ab-49e2-b7ba-836ae37d0a67" isDerived="false" sourceEndRoleName="Actor1" targetEndRoleName="Upload Xml template" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="fc690091-af18-4397-85f7-752fe87a5e0e" LastKnownName="Upload Xml template" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="ef3880d3-3567-4c31-b541-f0b0d0a39fc7" name="Actor1" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="08710c59-1c4d-43eb-9537-b34170113bd9" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="e63447ca-0639-4795-8181-db26ae76b7ff" name="Upload Xml template" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="c494ebd2-16b6-495d-b26b-9405e1ac224b" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="8bf8be3a-5625-43e2-8c05-0cf162c05df7" />
+          </association>
+          <association Id="27aed23a-4ffe-405a-9655-874a1a8106a0" isDerived="false" sourceEndRoleName="Actor1" targetEndRoleName="Specifiy output Directory" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="030361ea-2e1d-49fb-84f2-954d6745c2e5" LastKnownName="Specifiy output Directory" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="5689588b-28d4-4a22-9a6c-c5644bd07a78" name="Actor1" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="c21f67c6-c0b4-418d-ad22-848c2de0156a" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="93615fd0-b774-4f78-a642-66e94c9bb9cc" name="Specifiy output Directory" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="aa120870-3d80-45ad-a6c6-9116e461478b" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="0fcaa309-472d-4875-bfe0-fdbe1acc4177" />
+          </association>
+          <association Id="f8c0c764-cf4c-4e85-9ae2-9fc00294df7c" isDerived="false" sourceEndRoleName="Actor1" targetEndRoleName="Select Generate pdf" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="d4c43363-c6cc-43b6-9a75-10762513bdf1" LastKnownName="Select Generate pdf" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="232e1fcf-2859-4400-a1be-1fdefd27c0cc" name="Actor1" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="cbc89248-2dfd-4207-b3b0-48ef5b5af21d" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="635ca9aa-93b1-4969-8c16-8ad079268369" name="Select Generate pdf" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="10fa4233-3f70-4998-8519-67e626a0007b" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="e139e787-a79f-4539-9eb8-a2c951fa7a19" />
+          </association>
+          <association Id="4e324279-6c4e-445c-8096-c17d80f07be0" isDerived="false" sourceEndRoleName="Actor1" targetEndRoleName="Previews pdf in browser before retreiving output file" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="48acaadd-6ace-4de5-8622-2cfd33fecb46" LastKnownName="Previews pdf in browser before retreiving output file" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="f0c97962-8a02-4b2a-bb36-9b51cda8fd52" name="Actor1" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="ec6124d3-7e7f-422e-989f-539c7b318936" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="3a329f44-7187-459f-b134-6bf672838efe" name="Previews pdf in browser before retreiving output file" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="fbb85b37-ca99-4261-bb4a-46ba56e0e13c" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="6096ff85-9652-4422-b542-b3b0d0bc37f9" />
+          </association>
+          <association Id="f761d82d-ea62-4a58-b9c5-3673e04bd78c" isDerived="false" sourceEndRoleName="Actor1" targetEndRoleName="Retrieves generated pdf from destination path" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="dc384dbd-e42c-4b21-89e8-5b47f33b5c64" LastKnownName="Retrieves generated pdf from destination path" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="fe18e4e9-83d7-43f0-bdaf-2253cec93ff1" name="Actor1" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="589d9dde-dc76-4602-8e5e-ab6cd0346ea0" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="c019cce7-0d50-4800-9f73-31ba954adc74" name="Retrieves generated pdf from destination path" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="0e3e84ce-8298-41b3-b769-c68a77d827f5" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="d62b162f-a220-49ab-8e25-f10490c2f83e" />
+          </association>
+        </targetEnds>
+      </actor>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="3ca0536e-6a59-49dd-bcb0-daf5d2282381" name="Define xml templates" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="39bd0d1d-61af-4155-827f-12aebe445905" />
+        <extendedCases>
+          <extend Id="4e92a6ab-21cf-4234-8eaf-ab4321867f91">
+            <useCaseMoniker Id="54d57409-0cc8-4121-9c8d-c499d2d8802f" LastKnownName="Save Xml Templates" />
+            <elementDefinition Id="62984845-0821-4195-a6dc-1b5a736c7633" />
+          </extend>
+        </extendedCases>
+        <subjects>
+          <subsystemMoniker Id="f2c59091-8a71-4d16-8309-1668729e96f0" LastKnownName="Pdf Generator" />
+        </subjects>
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <subsystem Id="f2c59091-8a71-4d16-8309-1668729e96f0" name="Pdf Generator" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="e25a00fd-7d1d-4bb9-a428-c49b79341637" />
+      </subsystem>
+    </useCaseModelRootHasTypes>
+    <packageHasNamedElement>
+      <useCase Id="fc690091-af18-4397-85f7-752fe87a5e0e" name="Upload Xml template" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="34d42e72-fa8e-4622-8e90-67e1a98fd252" />
+        <subjects>
+          <subsystemMoniker Id="f2c59091-8a71-4d16-8309-1668729e96f0" LastKnownName="Pdf Generator" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="030361ea-2e1d-49fb-84f2-954d6745c2e5" name="Specifiy output Directory" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="ce54b536-6433-43c5-87e7-8cc19f73529e" />
+        <subjects>
+          <subsystemMoniker Id="f2c59091-8a71-4d16-8309-1668729e96f0" LastKnownName="Pdf Generator" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="d4c43363-c6cc-43b6-9a75-10762513bdf1" name="Select Generate pdf" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="33085203-d6a5-48d0-872b-e2c63b4d1c71" />
+        <subjects>
+          <subsystemMoniker Id="f2c59091-8a71-4d16-8309-1668729e96f0" LastKnownName="Pdf Generator" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="48acaadd-6ace-4de5-8622-2cfd33fecb46" name="Previews pdf in browser before retreiving output file" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="ee1b3b98-f1d5-4d62-bbe1-7fc789323503" />
+        <subjects>
+          <subsystemMoniker Id="f2c59091-8a71-4d16-8309-1668729e96f0" LastKnownName="Pdf Generator" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="dc384dbd-e42c-4b21-89e8-5b47f33b5c64" name="Retrieves generated pdf from destination path" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="3b1f0f8f-2604-4e0b-ae78-3c8cf518623d" />
+        <subjects>
+          <subsystemMoniker Id="f2c59091-8a71-4d16-8309-1668729e96f0" LastKnownName="Pdf Generator" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="e9c1da6d-bd68-4ddb-884e-b50cb0b1ee62" name="Customise Email" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="90c0cd31-01b6-4ad2-97c6-67ab0b351f8e" />
+        <subjects>
+          <subsystemMoniker Id="f2c59091-8a71-4d16-8309-1668729e96f0" LastKnownName="Pdf Generator" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="8014f8f4-dd85-40e4-be65-e07cc15fe20c" name="Upload Excel SpreadSheet" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="e5004752-da24-434a-adf1-57facf181b65" />
+        <subjects>
+          <subsystemMoniker Id="f2c59091-8a71-4d16-8309-1668729e96f0" LastKnownName="Pdf Generator" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="c9eebaf8-3d5a-49b2-8a0d-de83603875a3" name="Send Email with AttachedDocument" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="796e0a29-f9e8-4755-b7de-f13eb7dcddc7" />
+        <subjects>
+          <subsystemMoniker Id="f2c59091-8a71-4d16-8309-1668729e96f0" LastKnownName="Pdf Generator" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="54d57409-0cc8-4121-9c8d-c499d2d8802f" name="Save Xml Templates" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="9af65a68-5f68-43c8-99d6-c6e428b81ef7" />
+        <subjects>
+          <subsystemMoniker Id="f2c59091-8a71-4d16-8309-1668729e96f0" LastKnownName="Pdf Generator" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+  </packagedElements>
+  <package Id="8acf38c5-163c-43ef-a163-2a5c41446569" name="ModelingProject1">
+    <elementDefinition Id="a3ee4174-aa19-4daa-8654-616281c94958" />
+    <profileInstances>
+      <packageHasProfileInstances Id="6898cba9-0ee9-4e3e-bc03-6e123be32bb1">
+        <profileInstance Id="9dd38656-0cca-4a59-86ea-26c6ddb109df" name="StandardProfileL2">
+          <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+        </profileInstance>
+        <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+      </packageHasProfileInstances>
+      <packageHasProfileInstances Id="cbb66175-b50d-4893-ad85-c239ec6e9d2c">
+        <profileInstance Id="4a23fb74-b349-47f7-b9b4-aebcb91c61be" name="StandardProfileL3">
+          <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+        </profileInstance>
+        <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+      </packageHasProfileInstances>
+    </profileInstances>
+  </package>
+</useCaseModelRoot>
