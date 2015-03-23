@@ -1,7 +1,10 @@
 ﻿<Window x:Class="PDFGenerator.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="iGen" Height="691" Width="906" MinHeight="550" MinWidth="800" ResizeMode="NoResize" MaxHeight="900" MaxWidth="900">
+        Title="iGen" Height="691" Width="906" MinHeight="550" MinWidth="800" ResizeMode="CanMinimize"  MaxHeight="900" MaxWidth="900">
+    <Window.TaskbarItemInfo>
+        <TaskbarItemInfo/>
+    </Window.TaskbarItemInfo>
     <TabControl x:Name="Tabs" TabStripPlacement="Top" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Foreground="#FF9E9A9A" Margin="0" Grid.ColumnSpan="2" >
         <TabControl.Background>
             <ImageBrush/>
@@ -27,7 +30,7 @@
             </GroupBox>
         </TabItem>
         <TabItem Header="Batch Processing" Margin="0,2,0,0">
-            <GroupBox Header="Upload Xml Template" Width="899" Margin="0,0,-5,0">
+            <GroupBox Header="Upload Xml Template" Width="899" Margin="0,0,-5,0" Height="641" VerticalAlignment="Top">
                 <StackPanel Orientation="Horizontal" Margin="0,0,0,-5">
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,522"/>
                     <Grid Background="#FFBBB1B1" Margin="0,0,0,25"/>
@@ -36,27 +39,30 @@
                     <TextBox x:Name="txtFileUploadPath" Grid.Column="2" Grid.Row="1" Foreground="Black" VerticalAlignment="Top" Background="White" Height="20" Width="418" Margin="-691,28,-47,8"/>
                     <TextBox x:Name="txtDestinationForPdfBatch" Background="White" Foreground="Black" Grid.Row="1" Grid.Column="2" VerticalAlignment="Top" Height="20" Width="418" IsEnabled="False" Margin="-642,55,0,4"/>
                     <Button x:Name="btnDestinationPath" Content="Set Destination Path" Grid.Column="2" Grid.Row="1" IsEnabled="False" Click="btnDestinationPath_Click" Height="20" Width="119" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="-107,55,0,0"/>
-                    <Button x:Name="btnGen" Grid.Column="2" Click="btnGen_Click" Grid.Row="1" VerticalAlignment="Top" Height="20" Width="118" IsEnabled="False" Content="List Available Jobs" Margin="-121,83,0,0"/>
-                    <GroupBox Header="View Status of Batch" Width="873" Margin="-540,269,0,3">
+                    <Button x:Name="btnGen" Grid.Column="2" Click="btnGen_Click" Grid.Row="1" VerticalAlignment="Top" Height="20" Width="118" IsEnabled="False" Content="List Generated Files" Margin="-121,83,0,0"/>
+                    <ProgressBar Margin="-682,62,-18,489" Width="418" Height="21" Name="GenBar"></ProgressBar>
+                    <GroupBox Header="View Status of Batch" Width="879" Margin="-541,269,0,10">
                         <DataGrid x:Name="DataGrid1" Loaded="DataGrid1_Loaded" ItemsSource="{Binding}" AutoGenerateColumns="True" CanUserAddRows="False" CanUserDeleteRows="False" Background="#FFBBB1B1">
                             <DataGrid.Columns>
-                                <DataGridTemplateColumn Header="Progress Check">
+                                <DataGridTemplateColumn Header="Completed?">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate x:Name="CustomTemplate">
-                                            <ProgressBar Minimum="0" Maximum="1000" x:Name="MainProgressBar" Value="{Binding Property}"/>
+                                            <TextBox Text="Done"></TextBox>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
                             </DataGrid.Columns>
                         </DataGrid>
                     </GroupBox>
-                    <GroupBox Header="Import Data" Width="863" Margin="-955,-303,-81,-80" Height="133">
+                    <GroupBox Header="Import Data" Width="863" Margin="-1111,-303,-224,-80" Height="133">
                         <StackPanel Orientation="Horizontal" Margin="0" Name="stckPanel">
                             <TextBox Name="txtImport" Background="White" Foreground="Black" Grid.Column="2" Grid.Row="1" VerticalAlignment="Top" Height="20" Width="418" Margin="3,6,0,0">
                             </TextBox>
-                            <Button Name="btnImport" Content="Browse Data File" Click="btnImport_Click" Grid.Column="2" Grid.Row="1" Height="20" Width="119" Margin="2,-71,0,0"></Button>
-                            <Button Width=" 119" Height="20" Margin="-116,3,3,3" HorizontalAlignment="Right" Name="btnEditTemplate" Content="Edit a Template" Click="Button_Click_1"/>
-                            <ProgressBar Background="White" IsIndeterminate="False" Width="380" Height="20" Margin="-706,0,0,0" Maximum="100" Name="progressBar2"/>
+                            <Button Name="btnImport" Content="Browse Data File (.xlsx)" Click="btnImport_Click" Grid.Column="2" Grid.Row="1" Height="20" Width="142" Margin="2,6,0,77"></Button>
+                            <Button Width=" 119" Height="20" Margin="-117,3,3,3" HorizontalAlignment="Right" Name="btnEditTemplate" Content="Edit a Template" Click="Button_Click_1"/>
+                            <ProgressBar Foreground="Green" Background="White" IsIndeterminate="False" Width="385" Height="20" Margin="-746,42,0,41" Maximum="100" x:Name="progressBar2"/>
+                            <Label Margin="-543,66,308,19" Name="lblCompleted"></Label>
+                            <Label Margin="-121,66,3,19" Name="lblProcess"></Label>
                         </StackPanel>
                     </GroupBox>
                     <Button x:Name="btnUploadTemplate_Copy" Content="Upload Xml Template" Click="btnUploadTemplate_Click" Height="20" Width="119" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="424,27,-10,0"/>
@@ -69,7 +75,7 @@
                     <Label Content="Enter a Subject" Margin="0,40,0,541"/>
                     <TextBox Width="496" Background="White" Foreground="Black" Name="txtSubject" Margin="6,39,-1,541"/>
                     <Label Content="Enter Message Content" Margin="-994,94,0,490" Width="160"/>
-                    <TextBox Background="White" Width="496" Margin="-649,119,0,202" Name="txtContent" Foreground="Black"></TextBox>
+                    <TextBox AcceptsReturn="True" KeyDown="txtContent_KeyDown" Background="White" Width="747" Margin="-576,119,0,202" Name="txtContent" Foreground="Black"></TextBox>
                     <Button Name="btnSubmit" Click="btnSubmit_Click" Width="159" Height="20" Margin="-608,0,0,-266">Submit Options</Button>
                 </StackPanel>
             </GroupBox>

@@ -4,6 +4,8 @@ using System.Data;
 using System.Text.RegularExpressions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ClosedXML.Excel;
+using Scryber.Components;
+using ICSharpCode.AvalonEdit;
 using Outlook = Microsoft.Office.Interop.Outlook;
 
 
@@ -29,6 +31,7 @@ namespace PdfGeneratorTests
                 stream.Close();
             }
         }
+
         [TestMethod]
         public void CreateDynamicPdfFromDatabase()
         {
@@ -80,13 +83,14 @@ namespace PdfGeneratorTests
             try
             {
                 Exception exception = new Exception();
-                exception.Source = String.Format("{0}");
+                throw new ArgumentException(exception.InnerException.ToString(),exception);
             }
             catch (Exception exception)
             {
                 File.WriteAllText("C:\test.txt", exception.InnerException.ToString());
             }
         }
+
         [TestMethod]
         public void getExpectedPath()
         {
@@ -94,13 +98,16 @@ namespace PdfGeneratorTests
             Assert.AreEqual(DestinationPath, DestinationPath);
 
         }
+
         [TestMethod]
         public void InputFile()
         {
             var Extension = String.Format(@"^.*\.(pdfx|PDFX)");
             var fileExtension = String.Format(@"C:\Users\Akash Paul\Dropbox\XMLFile1.pdfx");
+            var FailExtension = String.Format(@"C:\Users\Akash Paul\Dropbox\temp.xml");
             Path.GetFileName(fileExtension);
-            if (Regex.IsMatch(fileExtension, Extension))
+            Path.GetFileName(FailExtension);
+            if (Regex.IsMatch(fileExtension, Extension) || Regex.IsMatch(FailExtension, Extension))
             {
                 Assert.IsTrue(true, "File is a valid extension");
             }
@@ -120,7 +127,7 @@ namespace PdfGeneratorTests
             }
             else
             {
-                Assert.IsFalse(false, "Email is not valid");
+                Assert.Fail("Email is not valid");
             }
         }
 
@@ -140,6 +147,7 @@ namespace PdfGeneratorTests
                 Assert.IsFalse(false, "File is not a valid extension");
             }
         }
+
         [TestMethod]
         public void ImportData()
         {
@@ -158,10 +166,11 @@ namespace PdfGeneratorTests
                 }
             }
         }
+
         [TestMethod]
         public void SendEmail()
         {
-            String document = @"C:\Users\Akash Paul\Testing\8db420f4-d1fa-48f6-8d9c-646ba2329086.pdf";
+            String document = @"C:\Users\Akash Paul\Testing\880c27db-6aa7-4ecb-bb9b-35f2509fc39b.pdf";
             String email = "paula@aston.ac.uk";
             Outlook.Recipients mailrecipient = null;
             Outlook.MailItem mail = null;
@@ -175,6 +184,7 @@ namespace PdfGeneratorTests
             rec.Resolve();
             mail.Send();
         }
+
         [TestMethod]
         public void SaveFile()
         {
@@ -204,21 +214,170 @@ namespace PdfGeneratorTests
         [TestMethod]
         public void OpenFileInEditor()
         {
+            var textEditor = new ICSharpCode.AvalonEdit.TextEditor();
             String documentPath = @"C:\Users\Akash Paul\Dropbox\XMLFile1.pdfx";
-
-
+            System.IO.StreamReader reader = new StreamReader(documentPath);
+            String mystring = reader.ReadToEnd();
+            textEditor.Document.Text = mystring;
         }
-
+        [TestMethod]
+        public void ListAllGeneratedFiles()
+        {
+            var collection = new System.Collections.Generic.List<String>();
+            String destinationPath = String.Format(@"C:\Users\Akash Paul\Downloads");
+            var outputPath = String.Format(@"{0}\{1}.pdf", destinationPath, Guid.NewGuid().ToString());
+            using (FileStream stream = new FileStream(outputPath, FileMode.CreateNew, FileAccess.ReadWrite))
+            using (PDFDocument document = PDFDocument.ParseDocument(@"C:\Users\Akash Paul\Dropbox\XMLFile1.pdfx"))
+            {
+                collection.Add(outputPath);
+                foreach (var collect in collection)
+                {
+                    Console.WriteLine(collect.ToString());
+                    document.ProcessDocument(stream, true);
+                    document.Info.Author = "Aston University";
+                    document.Info.CreationDate = DateTime.Now;
+                    stream.Flush();
+                    stream.Close();
+                }
+            }
+        }
         [TestMethod]
         public void importFileIntoDatabase()
         {
+            using (var workbook = new XLWorkbook(@"C:\Users\Akash Paul\Documents\ProperData.xlsx"))
+            {
+                var table = new DataTable("Datatable");
+                var workSheet = workbook.Worksheets.Worksheet(1);
+                var range = workSheet.FirstRow();
+                foreach (var row in range.CellsUsed())
+                {
+                    DataColumn column = new DataColumn();
+                    column.DataType = System.Type.GetType("System.String");
+                    column.ColumnName = row.Value.ToString();
+                    table.Columns.Add(column);
+                }
+                string exists = null;
+                var connectingString = String.Format("Server=localhost;Database=test;username=root;password=;Port=3306");
+                using (var connect = new MySql.Data.MySqlClient.MySqlConnection(connectingString))
+                {
+                    var range1 = workSheet.RangeUsed();
+                    var colCount = range1.ColumnCount();
+                    foreach (var row in range1.RowsUsed())
+                    {
+                        object[] rowData = new object[colCount];
+                        Int32 i = 0;
+                        row.Cells().ForEach(c => rowData[i++] = c.Value);
+                        table.Rows.Add(rowData);
+                    }
+                    DataRowCollection itemColumns = table.Rows;
+                    itemColumns[0].Delete();
+                    connect.Open();
 
-
+                    if (exists == null)
+                    {
+                        using (var command = connect.CreateCommand())
+                        {
+                            var collection = new System.Collections.Generic.Dictionary<String, MySql.Data.MySqlClient.MySqlDbType>();
+                            foreach (var col in table.Columns)
+                            {
+                                collection.Add(col.ToString(), MySql.Data.MySqlClient.MySqlDbType.VarChar);
+                            }
+                            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                            sb.Append(String.Format("CREATE TABLE {0} (", table.TableName));
+                            foreach (var loop in collection)
+                            {
+                                sb.AppendFormat("{0} {1}({2}),", loop.Key, loop.Value, 500);
+                            }
+                            command.CommandText = sb.ToString().Remove(sb.ToString().LastIndexOf(",")) + ")";
+                            command.Prepare();
+                            command.ExecuteNonQuery();
+                            var connectionString = String.Format("Server=localhost;Database=test;username=root;password=;Port=3306");
+                            using (var connect1 = new MySql.Data.MySqlClient.MySqlConnection(connectionString))
+                            {
+                                connect1.Open();
+                                var command1 = connect.CreateCommand();
+                                foreach (DataRow row in table.Rows)
+                                {
+                                    System.Text.StringBuilder builder = new System.Text.StringBuilder();
+                                    builder.Append(string.Format("INSERT INTO {0} VALUES (", table.TableName));
+                                    foreach (DataColumn col in table.Columns)
+                                    {
+                                        builder.AppendFormat("'{0}',", row[col].ToString());
+                                    }
+                                    command.Prepare();
+                                    command.CommandText = builder.ToString().Remove(builder.ToString().LastIndexOf(",")) + ")";
+                                    command.ExecuteNonQuery();
+                                }
+                                connect1.Close();
+                                connect.Close();
+                            }
+                        }
+                    }
+                }
+            }
         }
+        [TestMethod]
         public void ProducePDFDocumentWithImage()
         {
+            String fileName = String.Format(@"C:\Users\Akash Paul\Dropbox\XMLFile1.pdfx");
+            String DestinationPath = String.Format(@"C:\Users\Akash Paul\Downloads");
+            var outputPath = String.Format(@"{0}\{1}.pdf", DestinationPath, Guid.NewGuid().ToString());
+            var stream = new FileStream(outputPath, FileMode.CreateNew, FileAccess.ReadWrite);
+            using (Scryber.Components.PDFDocument document = Scryber.Components.PDFDocument.ParseDocument(fileName))
+            {
+                document.ProcessDocument(stream);
+                document.Info.Author = System.Environment.UserName;
+                document.Info.CreationDate = DateTime.Now;
+                stream.Flush();
+                stream.Close();
+            }
+        }
 
-
+        [TestMethod]
+        public void EmailContentTest()
+        {
+            String document = @"C:\Users\Akash Paul\Testing\b125f2f7-1cfb-41cf-bbca-c14fc2027a45.pdf";
+            String email = "paula@aston.ac.uk";
+            String Body = String.Format("This is an automated message which has an attached email to it and normally this will be come from a form in the GUI and submitted to the email client.");
+            Outlook.Recipients mailrecipient = null;
+            Outlook.MailItem mail = null;
+            Outlook.Recipient rec = null;
+            Outlook.Application app = new Outlook.Application();
+            mail = app.CreateItem(Microsoft.Office.Interop.Outlook.OlItemType.olMailItem) as Outlook.MailItem;
+            mail.Subject = String.Format("Test Subject");//
+            mail.Body = Body;
+            Outlook.Attachment attch = mail.Attachments.Add(document);
+            mailrecipient = mail.Recipients;
+            rec = mailrecipient.Add(email);
+            rec.Resolve();
+            mail.Send();
+        }
+        [TestMethod]
+        public void xmlSyntaxHiglighting()
+        {
+            var editor = new ICSharpCode.AvalonEdit.TextEditor();
+            editor.ShowLineNumbers = true;
+            String file = @"C:\Users\Akash Paul\Dropbox\XMLFile1.pdfx";
+            Stream pdfx = File.OpenRead(file);
+            editor.SyntaxHighlighting = ICSharpCode.AvalonEdit.Highlighting.HighlightingManager.Instance.GetDefinition("XML");
+        }
+        [TestMethod]
+        public void OpenPDFPreview()
+        {
+            String fileName = String.Format(@"C:\Users\Akash Paul\Dropbox\XMLFile1.pdfx");
+            String DestinationPath = String.Format(@"C:\Users\Akash Paul\Downloads");
+            var outputPath = String.Format(@"{0}\{1}.pdf", DestinationPath, Guid.NewGuid().ToString());
+            var stream = new FileStream(outputPath, FileMode.CreateNew, FileAccess.ReadWrite);
+            using (Scryber.Components.PDFDocument document = Scryber.Components.PDFDocument.ParseDocument(fileName))
+            {
+                document.ProcessDocument(stream);
+                document.Info.Author = System.Environment.UserName;
+                document.Info.CreationDate = DateTime.Now;
+                System.Diagnostics.Process.Start("explorer.exe", outputPath);
+                Assert.IsTrue(true, "Preview Successful");
+                stream.Flush();
+                stream.Close();
+            }
         }
     }
 }

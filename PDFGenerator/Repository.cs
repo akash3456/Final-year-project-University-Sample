@@ -16,7 +16,11 @@ using System.IO.Compression;
 using ClosedXML.Excel;
 using System.Text.RegularExpressions;
 using System.Net.Mail;
+using System.Windows.Controls;
+using System.Windows;
+using System.Windows.Media.Animation;
 using Outlook = Microsoft.Office.Interop.Outlook;
+
 
 
 namespace PDFGenerator
@@ -27,22 +31,24 @@ namespace PDFGenerator
         String destinationPath;
         public String outputPdfFile;
         List<String> collect = new List<String>();
-        DataTable table = new DataTable("Data_table");
-        Outlook.Recipients mailrecipients = null;
-        Outlook.MailItem mail = null;
-        Outlook.Recipient rec = null;
-        Outlook.Application app = new Outlook.Application();
+        List<String> emailAddresses = new List<String>();
+        String tableName;
+        DataTable table;
+        String Subject;
+        String Body;
 
-        public Repository(String filename, String DestinationPath)
+        public Repository(String filename, String DestinationPath, String Subject, String Body)
         {
+            table = new DataTable("Datatable");
+            this.Subject = Subject;
+            this.Body = Body;
             this.filename = filename;
             this.destinationPath = DestinationPath;
         }
-
-        //call mail subject and content in this method and apply it to domain controller..
-        public SampleDto getAll()
+        public List<String> getAll()
         {
             SampleDto dto = new SampleDto();
+            var ShowEmail = new List<String>();
             String connectionString = String.Format("Server=localhost;Database=test;username=root;password=;Port=3306");
             using (MySql.Data.MySqlClient.MySqlConnection connect = new MySql.Data.MySqlClient.MySqlConnection(connectionString))
             {
@@ -51,7 +57,7 @@ namespace PDFGenerator
                 command.CommandText = String.Format("SELECT * FROM {0}", table.TableName);
                 command.Prepare();
                 var reader = command.ExecuteReader();
-                var table1 = new DataTable();
+                var table1 = new DataTable(this.table.TableName);
                 table1.Load(reader);
                 foreach (DataRow row in table1.Rows)
                 {
@@ -75,31 +81,51 @@ namespace PDFGenerator
                             if (ValidateEmail(t.Value, t.Value))
                             {
                                 emailCollect.Add(t.Value);
+                                emailAddresses.Add(t.Value);
                             }
                         }
                         document.ProcessDocument(stream, true);
-                        document.Info.Author = System.Environment.UserName;
+                        document.Info.Author = "Aston University";
                         document.Info.CreationDate = DateTime.Now;
                         stream.Flush();
                         stream.Close();
+                        var counter = 0;
                         foreach (var emailList in emailCollect)
                         {
+                            Outlook.Recipients mailrecipients = null;
+                            Outlook.MailItem mail = null;
+                            Outlook.Recipient rec = null;
+                            Outlook.Application app = new Outlook.Application();
                             mail = app.CreateItem(Microsoft.Office.Interop.Outlook.OlItemType.olMailItem) as Outlook.MailItem;
-                            mail.Subject = "Official Transcript"; //subject variable..
-                            mail.Body = "";//body variable from .txt
+                            mail.Subject = Subject;
+                            mail.Body = Body;
                             Outlook.Attachment attach = mail.Attachments.Add(outputPath);
                             mailrecipients = mail.Recipients;
                             rec = mailrecipients.Add(emailList);
                             rec.Resolve();
                             mail.Send();
                             getContents(Path.GetFileName(outputPath));
+                            ShowEmail.Add(emailList);
+                            Console.WriteLine(counter);
                         }
                     }
                     Console.WriteLine("All Messages sent");
                 }
                 reader.Close();
+                DeleteTable(connect, command, table1);
             }
-            return dto;
+            return ShowEmail;
+        }
+        public void DeleteTable(MySql.Data.MySqlClient.MySqlConnection connect, MySql.Data.MySqlClient.MySqlCommand command, DataTable table)
+        {
+            var connectionString = String.Format("Server=localhost;Database=test;username=root;password=;Port=3306");
+            using (connect = new MySql.Data.MySqlClient.MySqlConnection(connectionString))
+            {
+                connect.Open();
+                command = connect.CreateCommand();
+                command.CommandText = String.Format("DROP TABLE {0}", table.TableName);
+                command.ExecuteNonQuery();
+            }
         }
 
         public bool ValidateEmail(String email, String fieldValue)
@@ -116,7 +142,9 @@ namespace PDFGenerator
         }
         public String isValidEmail(String email, String fieldValue)
         {
-            if (Regex.IsMatch(email, @"^(?("")(""[^""]+?""@)|(([0-9a-z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-z])@)(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-z][-\w]*[0-9a-z]*\.)+[a-z0-9]{2,17}))$)", RegexOptions.IgnoreCase))
+            if (Regex.IsMatch(email, @"^(?("")(""[^""]+?""@)|(([0-9a-z]((\.(?!\.))|
+[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-z])@)(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-z][-\w]
+*[0-9a-z]*\.)+[a-z0-9]{2,17}))$)", RegexOptions.IgnoreCase))
             {
                 return email;
             }
@@ -124,10 +152,6 @@ namespace PDFGenerator
             {
                 return fieldValue;
             }
-        }
-        public void ReadCsv(String inputFile)
-        {
-
         }
         public DataTable gettable()
         {
@@ -216,7 +240,6 @@ namespace PDFGenerator
             }
             return table;
         }
-        public Stopwatch Progress { get; set; }
         public DataTable getContents(String outputPath)
         {
             var table = new DataTable();
@@ -229,6 +252,10 @@ namespace PDFGenerator
                 table.Rows.Add(row);
             }
             return table;
+        }
+        public List<String> getFiles()
+        {
+            return collect;
         }
         public String ProcessDirectoryInfo(String Filename)
         {

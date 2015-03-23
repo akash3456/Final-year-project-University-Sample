@@ -13,5 +13,9 @@ namespace PDFGenerator
     /// </summary>
     public partial class App : Application
     {
+        private void JumpList_JumpItemsRejected(object sender, System.Windows.Shell.JumpItemsRejectedEventArgs e)
+        {
+
+        }
     }
 }

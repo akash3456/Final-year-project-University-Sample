@@ -46,6 +46,8 @@ C:\Users\Akash Paul\Documents\pdfgenerator\PDFGenerator\bin\Debug\PDFGenerator.e
 C:\Users\Akash Paul\Documents\pdfgenerator\PDFGenerator\bin\Debug\PDFGenerator.exe.lastcodeanalysissucceeded
 C:\Users\Akash Paul\Documents\pdfgenerator\PDFGenerator\bin\Debug\ClosedXML.dll
 C:\Users\Akash Paul\Documents\pdfgenerator\PDFGenerator\bin\Debug\ICSharpCode.AvalonEdit.dll
+C:\Users\Akash Paul\Documents\pdfgenerator\PDFGenerator\bin\Debug\Microsoft.Windows.Shell.dll
+C:\Users\Akash Paul\Documents\pdfgenerator\PDFGenerator\bin\Debug\nunit.framework.dll
 C:\Users\Akash Paul\Documents\pdfgenerator\PDFGenerator\bin\Debug\Scryber.Common.dll
 C:\Users\Akash Paul\Documents\pdfgenerator\PDFGenerator\bin\Debug\Scryber.Components.dll
 C:\Users\Akash Paul\Documents\pdfgenerator\PDFGenerator\bin\Debug\Scryber.Configuration.dll
@@ -53,8 +55,12 @@ C:\Users\Akash Paul\Documents\pdfgenerator\PDFGenerator\bin\Debug\Scryber.Drawin
 C:\Users\Akash Paul\Documents\pdfgenerator\PDFGenerator\bin\Debug\Scryber.Generation.dll
 C:\Users\Akash Paul\Documents\pdfgenerator\PDFGenerator\bin\Debug\Scryber.OpenType.dll
 C:\Users\Akash Paul\Documents\pdfgenerator\PDFGenerator\bin\Debug\Scryber.Styles.dll
+C:\Users\Akash Paul\Documents\pdfgenerator\PDFGenerator\bin\Debug\TechTalk.SpecFlow.dll
 C:\Users\Akash Paul\Documents\pdfgenerator\PDFGenerator\bin\Debug\ClosedXML.xml
 C:\Users\Akash Paul\Documents\pdfgenerator\PDFGenerator\bin\Debug\ICSharpCode.AvalonEdit.xml
+C:\Users\Akash Paul\Documents\pdfgenerator\PDFGenerator\bin\Debug\Microsoft.Windows.Shell.pdb
+C:\Users\Akash Paul\Documents\pdfgenerator\PDFGenerator\bin\Debug\Microsoft.Windows.Shell.xml
+C:\Users\Akash Paul\Documents\pdfgenerator\PDFGenerator\bin\Debug\nunit.framework.xml
 C:\Users\Akash Paul\Documents\pdfgenerator\PDFGenerator\obj\Debug\MainWindow.baml
 C:\Users\Akash Paul\Documents\pdfgenerator\PDFGenerator\obj\Debug\Themes\BureauBlue.baml
 C:\Users\Akash Paul\Documents\pdfgenerator\PDFGenerator\obj\Debug\Themes\ExpressionDark.baml
@@ -70,6 +76,7 @@ C:\Users\Akash Paul\Documents\pdfgenerator\PDFGenerator\obj\Debug\App.g.cs
 C:\Users\Akash Paul\Documents\pdfgenerator\PDFGenerator\obj\Debug\PDFGenerator_MarkupCompile.cache
 C:\Users\Akash Paul\Documents\pdfgenerator\PDFGenerator\obj\Debug\PDFGenerator.g.resources
 C:\Users\Akash Paul\Documents\pdfgenerator\PDFGenerator\obj\Debug\PDFGenerator.Properties.Resources.resources
+C:\Users\Akash Paul\Documents\pdfgenerator\PDFGenerator\obj\Debug\PDFGenerator.Resources.Resource1.resources
 C:\Users\Akash Paul\Documents\pdfgenerator\PDFGenerator\obj\Debug\PDFGenerator.csproj.GenerateResource.Cache
 C:\Users\Akash Paul\Documents\pdfgenerator\PDFGenerator\obj\Debug\PDFGenerator.exe
 C:\Users\Akash Paul\Documents\pdfgenerator\PDFGenerator\obj\Debug\PDFGenerator.pdb
